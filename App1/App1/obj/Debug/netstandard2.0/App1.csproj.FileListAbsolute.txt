@@ -1,0 +1,14 @@
+C:\git\soe-mobile\App1\App1\bin\Debug\netstandard2.0\App1.deps.json
+C:\git\soe-mobile\App1\App1\bin\Debug\netstandard2.0\App1.dll
+C:\git\soe-mobile\App1\App1\bin\Debug\netstandard2.0\ref\App1.dll
+C:\git\soe-mobile\App1\App1\bin\Debug\netstandard2.0\App1.pdb
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.csprojAssemblyReference.cache
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.AssemblyInfoInputs.cache
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.AssemblyInfo.cs
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.csproj.CoreCompileInputs.cache
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\XamlC.stamp
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.dll
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\ref\App1.dll
+C:\git\soe-mobile\App1\App1\obj\Debug\netstandard2.0\App1.pdb
