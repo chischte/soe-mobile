@@ -15,5 +15,9 @@ namespace App1
             InitializeComponent();
         }
 
+        private void Button_C_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
