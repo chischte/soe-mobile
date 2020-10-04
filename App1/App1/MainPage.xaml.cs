@@ -11,15 +11,7 @@ namespace App1
     public partial class MainPage : ContentPage
     {
 
-        private string _commandText;
-        public string CommandText
-        {
-            get => _commandText;
-            set
-            {
-                _commandText = value;
-            }
-        }
+        public string CommandText { get; set; }
 
         public MainPage()
         {
@@ -28,7 +20,7 @@ namespace App1
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            CommandText = "Finish";
+            myLabel.Text = "Hello World";
             DisplayPromptAsync("Question 1", "What's your name?");
         }
     }
