@@ -170,12 +170,5 @@
             FontSize="30"
             Text="="
             VerticalOptions="Center" />
-
-
-
-
-
     </Grid>
-
-
 </ContentPage>
