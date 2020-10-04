@@ -40,7 +40,7 @@
             Clicked="Button_C_Clicked"
             FontAttributes="Bold"
             FontSize="30"
-            Text="C"
+            Text="{Binding CommandText}"
             VerticalOptions="Center" />
         <Button
             Grid.Row="2"
