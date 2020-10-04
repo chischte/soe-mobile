@@ -31,20 +31,21 @@
             FontAttributes="Bold"
             FontSize="40"
             HorizontalOptions="Center"
-            Text="0"
+            Text="{Binding Name}"
             TextColor="Yellow"
             VerticalOptions="Center" />
         <Button
+            x:Name="myLabel"
             Grid.Row="2"
             Grid.Column="0"
             Clicked="Button_C_Clicked"
             FontAttributes="Bold"
             FontSize="30"
-            x:Name="myLabel"
             VerticalOptions="Center" />
         <Button
             Grid.Row="2"
             Grid.Column="1"
+            Clicked="Button_plus_minus"
             FontAttributes="Bold"
             FontSize="30"
             Text="+/-"
