@@ -67,6 +67,7 @@
             Text="÷"
             VerticalOptions="Center" />
         <Button
+            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="0"
             FontAttributes="Bold"
@@ -74,7 +75,7 @@
             Text="7"
             VerticalOptions="Center" />
         <Button
-            Clicked="Button_8_Clicked"
+            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="1"
             FontAttributes="Bold"
@@ -82,6 +83,7 @@
             Text="8"
             VerticalOptions="Center" />
         <Button
+            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="2"
             FontAttributes="Bold"
@@ -96,6 +98,7 @@
             Text="×"
             VerticalOptions="Center" />
         <Button
+           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="0"
             FontAttributes="Bold"
@@ -103,6 +106,7 @@
             Text="4"
             VerticalOptions="Center" />
         <Button
+           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="1"
             FontAttributes="Bold"
@@ -110,6 +114,7 @@
             Text="5"
             VerticalOptions="Center" />
         <Button
+           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="2"
             FontAttributes="Bold"
@@ -125,6 +130,7 @@
             Text="-"
             VerticalOptions="Center" />
         <Button
+           Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="0"
             FontAttributes="Bold"
@@ -132,6 +138,7 @@
             Text="1"
             VerticalOptions="Center" />
         <Button
+            Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="1"
             FontAttributes="Bold"
@@ -139,6 +146,7 @@
             Text="2"
             VerticalOptions="Center" />
         <Button
+            Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="2"
             FontAttributes="Bold"

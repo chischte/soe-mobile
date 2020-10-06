@@ -11,10 +11,10 @@ namespace App1
     public partial class MainPage : ContentPage
     {
         string mathOperator;
-        int operationStage=0; // 0 = enter first  operand ...stay in this state until an operator is pressed
-                              // 1 = enter operator ...
-                              // 2 = enter second operand
-                              // 3 = display result
+        int operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
+                                // 1 = enter operator ...
+                                // 2 = enter second operand
+                                // 3 = display result
         string firstOperand;
         string secondOperand;
         string operationMode; //add / subtract / multiply / divide
@@ -40,7 +40,6 @@ namespace App1
         private void Button_Plus_Clicked(object sender, EventArgs e)
         {
             operationStage = 3;
-            resultText.Text = "10";
 
         }
 
@@ -48,7 +47,7 @@ namespace App1
         {
             Button button = (Button)sender;
             string pressed = button.Text;
-            if(pressed== "÷")
+            if (pressed == "÷")
             {
                 operationMode = "divide";
             }
@@ -66,21 +65,26 @@ namespace App1
 
             int resultValue = int.Parse(firstOperand) + int.Parse(secondOperand);
             resultText.Text = resultValue.ToString();
+            operationStage = 0;
 
         }
 
-        private void Button_8_Clicked(object sender, EventArgs e)
+        private void OnEnterOperand(object sender, EventArgs e)
         {
-           if(operationStage==0)
+            Button button = (Button)sender;
+            string operand = button.Text;
+
+
+            if (operationStage == 0)
             {
-                firstOperand = "8";
-                resultText.Text = "8";
+                firstOperand += operand;
+                resultText.Text = firstOperand;
                 //resultText.Text = "8";
             }
-           if (operationStage==3)
+            if (operationStage == 3)
             {
-                secondOperand = "16";
-                resultText.Text = "16";
+                secondOperand = operand;
+                resultText.Text = operand;
             }
 
         }
