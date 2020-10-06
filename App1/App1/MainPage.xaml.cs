@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace App1
 {
+    
     public partial class MainPage : ContentPage
     {
         string mathOperator;
@@ -18,11 +19,11 @@ namespace App1
         string firstOperand;
         string secondOperand;
         string operationMode; //add / subtract / multiply / divide
-
-
         public string Name { get; set; }
 
-        public MainPage()
+        private ICalculator calculator;
+
+        public MainPage( ICalculator calculator)
         {
             InitializeComponent();
         }
