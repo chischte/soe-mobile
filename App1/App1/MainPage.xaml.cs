@@ -39,6 +39,7 @@ namespace App1
 
         private void Button_Plus_Clicked(object sender, EventArgs e)
         {
+            operationStage = 3;
             resultText.Text = "10";
 
         }
@@ -63,13 +64,23 @@ namespace App1
         private void Button_Result_Clicked(object sender, EventArgs e)
         {
 
+            int resultValue = int.Parse(firstOperand) + int.Parse(secondOperand);
+            resultText.Text = resultValue.ToString();
+
         }
 
         private void Button_8_Clicked(object sender, EventArgs e)
         {
            if(operationStage==0)
             {
+                firstOperand = "8";
                 resultText.Text = "8";
+                //resultText.Text = "8";
+            }
+           if (operationStage==3)
+            {
+                secondOperand = "16";
+                resultText.Text = "16";
             }
 
         }
