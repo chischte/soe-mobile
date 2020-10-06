@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <Label
-            x:Name="result"
+            x:Name="resultText"
             Grid.Row="0"
             Grid.RowSpan="4"
             Grid.Column="0"
@@ -36,7 +36,7 @@
             TextColor="Yellow"
             VerticalOptions="Center" />
         <Button
-            x:Name="myLabel"
+            Text="C"
             Grid.Row="2"
             Grid.Column="0"
             Clicked="Button_C_Clicked"
@@ -63,6 +63,7 @@
             Grid.Column="3"
             FontAttributes="Bold"
             FontSize="30"
+            Clicked="OnSelectOperator"
             Text="÷"
             VerticalOptions="Center" />
         <Button
@@ -73,6 +74,7 @@
             Text="7"
             VerticalOptions="Center" />
         <Button
+            Clicked="Button_8_Clicked"
             Grid.Row="3"
             Grid.Column="1"
             FontAttributes="Bold"
@@ -115,6 +117,7 @@
             Text="6"
             VerticalOptions="Center" />
         <Button
+            Clicked="Button_Subtract_Clicked"
             Grid.Row="4"
             Grid.Column="3"
             FontAttributes="Bold"
@@ -166,6 +169,7 @@
             Text="."
             VerticalOptions="Center" />
         <Button
+            Clicked="Button_Result_Clicked"
             Grid.Row="6"
             Grid.Column="3"
             FontAttributes="Bold"
