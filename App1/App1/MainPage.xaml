@@ -36,12 +36,12 @@
             TextColor="Yellow"
             VerticalOptions="Center" />
         <Button
-            Text="C"
             Grid.Row="2"
             Grid.Column="0"
             Clicked="Button_C_Clicked"
             FontAttributes="Bold"
             FontSize="30"
+            Text="C"
             VerticalOptions="Center" />
         <Button
             Grid.Row="2"
@@ -61,31 +61,31 @@
         <Button
             Grid.Row="2"
             Grid.Column="3"
+            Clicked="OnSelectOperation"
             FontAttributes="Bold"
             FontSize="30"
-            Clicked="OnSelectOperator"
             Text="÷"
             VerticalOptions="Center" />
         <Button
-            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="0"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="7"
             VerticalOptions="Center" />
         <Button
-            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="1"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="8"
             VerticalOptions="Center" />
         <Button
-            Clicked="OnEnterOperand"
             Grid.Row="3"
             Grid.Column="2"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="9"
@@ -93,70 +93,71 @@
         <Button
             Grid.Row="3"
             Grid.Column="3"
+            Clicked="OnSelectOperation"
             FontAttributes="Bold"
             FontSize="30"
             Text="×"
             VerticalOptions="Center" />
         <Button
-           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="0"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="4"
             VerticalOptions="Center" />
         <Button
-           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="1"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="5"
             VerticalOptions="Center" />
         <Button
-           Clicked="OnEnterOperand"
             Grid.Row="4"
             Grid.Column="2"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="6"
             VerticalOptions="Center" />
         <Button
-            Clicked="Button_Subtract_Clicked"
             Grid.Row="4"
             Grid.Column="3"
+            Clicked="OnSelectOperation"
             FontAttributes="Bold"
             FontSize="30"
             Text="-"
             VerticalOptions="Center" />
         <Button
-           Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="0"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="1"
             VerticalOptions="Center" />
         <Button
-            Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="1"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="2"
             VerticalOptions="Center" />
         <Button
-            Clicked="OnEnterOperand"
             Grid.Row="5"
             Grid.Column="2"
+            Clicked="OnEnterOperand"
             FontAttributes="Bold"
             FontSize="30"
             Text="3"
             VerticalOptions="Center" />
         <Button
-            Clicked="Button_Plus_Clicked"
             Grid.Row="5"
             Grid.Column="3"
+            Clicked="OnSelectOperation"
             FontAttributes="Bold"
             FontSize="30"
             Text="+"
@@ -177,9 +178,9 @@
             Text="."
             VerticalOptions="Center" />
         <Button
-            Clicked="Button_Result_Clicked"
             Grid.Row="6"
             Grid.Column="3"
+            Clicked="Button_Result_Clicked"
             FontAttributes="Bold"
             FontSize="30"
             Text="="

@@ -30,23 +30,32 @@ namespace App1
         private void Button_C_Clicked(object sender, EventArgs e)
         {
             resultText.Text = "0";
+            firstOperand = "";
+            secondOperand = "";
+            operationStage = 0;
         }
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
-            Name = "DOKEY";
-        }
-
-        private void Button_Plus_Clicked(object sender, EventArgs e)
-        {
-            operationStage = 3;
 
         }
 
-        private void OnSelectOperator(object sender, EventArgs e)
+        private void OnSelectOperation(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string pressed = button.Text;
+            if (pressed == "+")
+            {
+                operationMode = "add";
+            }
+            if (pressed == "-")
+            {
+                operationMode = "subtract";
+            }
+            if (pressed == "×")
+            {
+                operationMode = "multiply";
+            }
             if (pressed == "÷")
             {
                 operationMode = "divide";
@@ -55,18 +64,35 @@ namespace App1
             resultText.Text = pressed;
         }
 
-        private void Button_Subtract_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
         private void Button_Result_Clicked(object sender, EventArgs e)
         {
+            int valueFirstOperand = int.Parse(firstOperand);
+            int valueSecondOperand = int.Parse(secondOperand);
+            int resultValue;
 
-            int resultValue = int.Parse(firstOperand) + int.Parse(secondOperand);
-            resultText.Text = resultValue.ToString();
-            operationStage = 0;
+            if (operationMode == "add")
+            {
+                resultValue = valueFirstOperand + valueSecondOperand;
+            }
+            if (operationMode == "subtract")
+            {
+                resultValue = valueFirstOperand - valueSecondOperand;
+            }
+            if (operationMode == "multiply")
+            {
+                resultValue = valueFirstOperand * valueSecondOperand;
+            }
+            if (operationMode == "divide")
+            {
+                resultValue = valueFirstOperand / valueSecondOperand;
+            }
 
+
+            resultValue = int.Parse(firstOperand) + int.Parse(secondOperand);
+            string resultString = resultValue.ToString();
+            firstOperand = resultString;
+            resultText.Text = resultString;
+            operationStage = 3;
         }
 
         private void OnEnterOperand(object sender, EventArgs e)
@@ -83,8 +109,8 @@ namespace App1
             }
             if (operationStage == 3)
             {
-                secondOperand = operand;
-                resultText.Text = operand;
+                secondOperand += operand;
+                resultText.Text = secondOperand;
             }
 
         }
