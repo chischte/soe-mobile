@@ -163,6 +163,7 @@
             Text="+"
             VerticalOptions="Center" />
         <Button
+            Clicked="OnEnterOperand"
             Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="2"
