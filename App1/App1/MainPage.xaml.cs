@@ -29,5 +29,11 @@ namespace App1
         {
             Name = "DOKEY";
         }
+
+        private void Button_Plus_Clicked(object sender, EventArgs e)
+        {
+            result.Text="10";
+
+        }
     }
 }

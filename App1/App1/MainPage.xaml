@@ -22,6 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <Label
+            x:Name="result"
             Grid.Row="0"
             Grid.RowSpan="4"
             Grid.Column="0"
@@ -142,6 +143,7 @@
             Text="3"
             VerticalOptions="Center" />
         <Button
+            Clicked="Button_Plus_Clicked"
             Grid.Row="5"
             Grid.Column="3"
             FontAttributes="Bold"
