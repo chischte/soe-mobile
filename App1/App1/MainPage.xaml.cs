@@ -26,22 +26,24 @@ namespace App1
             DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
         }
 
+        enum OperationMode
+        {
+            Add = 0,
+            Subtract = 1,
+            Multiply = 2,
+            Divide = 3
+        }
 
-
-        OperationStage operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
-                                           // 1 = enter operator ...
-                                           // 2 = enter second operand
-                                           // 3 = display result
+        private OperationStage operationStage = OperationStage.EnterFirstOperand;
+        private OperationMode operationMode = OperationMode.Add;
         string firstOperand;
         string secondOperand;
-        string operationMode; //add / subtract / multiply / divide
+
         public string Name { get; set; }
 
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-           // double loerere = calculator.GetResult();
-           // Console.WriteLine(loerere);
             resultText.Text = "0";
             firstOperand = "";
             secondOperand = "";
@@ -50,35 +52,31 @@ namespace App1
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
-            //double loesch = calculator.GetResult();
-            //Console.WriteLine(loesch);
-
-
         }
 
         private void OnSelectOperation(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string pressed = button.Text;
-           
+
             if (pressed == "+")
             {
-                operationMode = "add";
+                operationMode = OperationMode.Add;
                 operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "-")
             {
-                operationMode = "subtract";
+                operationMode = OperationMode.Subtract;
                 operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "×")
             {
-                operationMode = "multiply";
+                operationMode = OperationMode.Multiply;
                 operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "÷")
             {
-                operationMode = "divide";
+                operationMode = OperationMode.Divide;
                 operationStage = OperationStage.EnterSecondOperand;
             }
             resultText.Text = pressed;
@@ -86,25 +84,25 @@ namespace App1
 
         private void Button_Result_Clicked(object sender, EventArgs e)
         {
-            int valueFirstOperand = int.Parse(firstOperand);
-            int valueSecondOperand = int.Parse(secondOperand);
-            int resultValue = 0;
+            double valueFirstOperand = Convert.ToDouble(firstOperand);
+            double valueSecondOperand = Convert.ToDouble(secondOperand);
+            double resultValue = 0;
 
-            if (operationMode == "add")
+            if (operationMode == OperationMode.Add)
             {
-                resultValue = valueFirstOperand + valueSecondOperand;
+                resultValue = calculator.Add(valueFirstOperand, valueSecondOperand);
             }
-            if (operationMode == "subtract")
+            if (operationMode == OperationMode.Subtract)
             {
-                resultValue = valueFirstOperand - valueSecondOperand;
+                resultValue = calculator.Subtract(valueFirstOperand, valueSecondOperand);
             }
-            if (operationMode == "multiply")
+            if (operationMode == OperationMode.Multiply)
             {
-                resultValue = valueFirstOperand * valueSecondOperand;
+                resultValue = calculator.Multiply(valueFirstOperand, valueSecondOperand);
             }
-            if (operationMode == "divide")
+            if (operationMode == OperationMode.Divide)
             {
-                resultValue = valueFirstOperand / valueSecondOperand;
+                resultValue = calculator.Divide(valueFirstOperand, valueSecondOperand);
             }
 
             string resultString = resultValue.ToString();
