@@ -15,12 +15,11 @@ namespace App1
 
     public partial class MainPage : ContentPage
     {
-        private Calculator calculator;
-
-        public MainPage(Calculator calculator)
+        private readonly ICalculator _calculator;
+        public MainPage(ICalculator calculator)
         {
             InitializeComponent();
-            this.calculator = calculator;
+            _calculator = calculator;
             resultText.Text = "0";
 
         }
@@ -154,19 +153,19 @@ namespace App1
 
             if (operationMode == OperationMode.Add)
             {
-                resultValue = calculator.Add(valueFirstOperand, valueSecondOperand);
+                resultValue = _calculator.Add(valueFirstOperand, valueSecondOperand);
             }
             if (operationMode == OperationMode.Subtract)
             {
-                resultValue = calculator.Subtract(valueFirstOperand, valueSecondOperand);
+                resultValue = _calculator.Subtract(valueFirstOperand, valueSecondOperand);
             }
             if (operationMode == OperationMode.Multiply)
             {
-                resultValue = calculator.Multiply(valueFirstOperand, valueSecondOperand);
+                resultValue = _calculator.Multiply(valueFirstOperand, valueSecondOperand);
             }
             if (operationMode == OperationMode.Divide)
             {
-                resultValue = calculator.Divide(valueFirstOperand, valueSecondOperand);
+                resultValue = _calculator.Divide(valueFirstOperand, valueSecondOperand);
             }
             resultString = resultValue.ToString();
             firstOperand = resultString;

@@ -9,9 +9,8 @@ namespace App1
         
         public App()
         {
-            Calculator calculator = new Calculator();
             InitializeComponent();
-            MainPage = new MainPage(calculator);
+            MainPage = new MainPage(new Calculator());
         }
 
         protected override void OnStart()
