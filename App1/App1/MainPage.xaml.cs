@@ -9,6 +9,8 @@ using Xamarin.Forms;
 namespace App1
 {
 
+    // Fix Bug + = Crashes the app
+
     public partial class MainPage : ContentPage
     {
         private Calculator calculator;
@@ -38,6 +40,7 @@ namespace App1
         private OperationMode operationMode = OperationMode.Add;
         string firstOperand;
         string secondOperand;
+        string resultString;
 
         public string Name { get; set; }
 
@@ -47,8 +50,10 @@ namespace App1
             resultText.Text = "0";
             firstOperand = "";
             secondOperand = "";
-            operationStage = 0;
+            resultString = "";
+            operationStage = OperationStage.EnterFirstOperand;
         }
+
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
@@ -59,34 +64,84 @@ namespace App1
             Button button = (Button)sender;
             string pressed = button.Text;
 
+
+            // Continue a new Calculation:
+            if (operationStage == OperationStage.EnterFirstOperand)
+            {
+                secondOperand = "";
+            }
+
+            // Continue with a Result:
+            if (operationStage == OperationStage.DisplayResult)
+            {
+                firstOperand = resultString;
+                secondOperand = "";
+            }
+
+            // Continue a chained Calculation 
+            if (operationStage == OperationStage.EnterSecondOperand)
+            {
+                CalculateResult();
+                secondOperand = "";
+            }
+            operationStage = OperationStage.EnterSecondOperand;
+
+
             if (pressed == "+")
             {
                 operationMode = OperationMode.Add;
-                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "-")
             {
                 operationMode = OperationMode.Subtract;
-                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "×")
             {
                 operationMode = OperationMode.Multiply;
-                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "÷")
             {
                 operationMode = OperationMode.Divide;
-                operationStage = OperationStage.EnterSecondOperand;
             }
             resultText.Text = pressed;
         }
 
-        private void Button_Result_Clicked(object sender, EventArgs e)
+
+
+        private void OnEnterOperand(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string operand = button.Text;
+
+
+            if (operationStage == OperationStage.EnterFirstOperand)
+            {
+                firstOperand += operand;
+                resultText.Text = firstOperand;
+            }
+            if (operationStage == OperationStage.EnterSecondOperand)
+            {
+                secondOperand += operand;
+                resultText.Text = secondOperand;
+            }
+
+            if (operationStage == OperationStage.DisplayResult)
+            {
+                operationStage = OperationStage.EnterFirstOperand;
+                firstOperand = operand;
+                secondOperand = "";
+
+            }
+
+        }
+
+        private void CalculateResult()
         {
             double valueFirstOperand = Convert.ToDouble(firstOperand);
             double valueSecondOperand = Convert.ToDouble(secondOperand);
             double resultValue = 0;
+
+            operationStage = OperationStage.DisplayResult;
 
             if (operationMode == OperationMode.Add)
             {
@@ -104,30 +159,15 @@ namespace App1
             {
                 resultValue = calculator.Divide(valueFirstOperand, valueSecondOperand);
             }
-
-            string resultString = resultValue.ToString();
+            resultString = resultValue.ToString();
+            firstOperand = resultString;
             resultText.Text = resultString;
-            operationStage = OperationStage.DisplayResult;
         }
 
-        private void OnEnterOperand(object sender, EventArgs e)
+
+        private void Button_Result_Clicked(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            string operand = button.Text;
-
-
-            if (operationStage == OperationStage.EnterFirstOperand)
-            {
-                firstOperand += operand;
-                resultText.Text = firstOperand;
-                //resultText.Text = "8";
-            }
-            if (operationStage == OperationStage.EnterSecondOperand)
-            {
-                secondOperand += operand;
-                resultText.Text = secondOperand;
-            }
-
+            CalculateResult();
         }
     }
 }
