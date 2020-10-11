@@ -1,4 +1,7 @@
-
+App1/App1.Android/bin/
 App1/App1.Android/obj/Debug/
-
-App1/App1/bin/
+App1/App1.iOS/bin/iPhone/Debug/
+App1/App1.iOS/obj/iPhone/Debug/
+App1/App1/obj/Debug/
+App1/App1/bin/Debug/
+.suo

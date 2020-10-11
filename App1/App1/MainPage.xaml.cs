@@ -8,9 +8,17 @@ using Xamarin.Forms;
 
 namespace App1
 {
-    
+
     public partial class MainPage : ContentPage
     {
+        //enum OperationStage
+        //{
+        //    EnterFirstOperand = 0,   // Stay in this state until an operator is pressed
+        //    EnterSecondOperand = 1,  // Stay in this state until result is pressed
+        //    DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
+        //}
+
+
         string mathOperator;
         int operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
                                 // 1 = enter operator ...
@@ -23,7 +31,8 @@ namespace App1
 
         private ICalculator calculator;
 
-        public MainPage( ICalculator calculator)
+        //public MainPage(ICalculator calculator)
+        public MainPage()
         {
             InitializeComponent();
         }
@@ -38,6 +47,9 @@ namespace App1
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
+            int loesch = calculator.GetResult();
+            Console.WriteLine(loesch);
+
 
         }
 
@@ -47,7 +59,8 @@ namespace App1
             string pressed = button.Text;
             if (pressed == "+")
             {
-                operationMode = "add";
+                operationMode = "add"; 
+                Console.WriteLine("ADD PRESSED");
             }
             if (pressed == "-")
             {

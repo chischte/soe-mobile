@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App1
 {
-    class Calculator:ICalculator
+   public class Calculator:ICalculator
     {
         public int GetResult()
         {
