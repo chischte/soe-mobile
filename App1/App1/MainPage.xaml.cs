@@ -11,16 +11,15 @@ namespace App1
 
     public partial class MainPage : ContentPage
     {
-        //enum OperationStage
-        //{
-        //    EnterFirstOperand = 0,   // Stay in this state until an operator is pressed
-        //    EnterSecondOperand = 1,  // Stay in this state until result is pressed
-        //    DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
-        //}
-
+        enum OperationStage
+        {
+            EnterFirstOperand = 0,   // Stay in this state until an operator is pressed
+            EnterSecondOperand = 1,  // Stay in this state until result is pressed
+            DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
+        }
 
         string mathOperator;
-        int operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
+        OperationStage operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
                                 // 1 = enter operator ...
                                 // 2 = enter second operand
                                 // 3 = display result
@@ -61,18 +60,22 @@ namespace App1
             {
                 operationMode = "add"; 
                 Console.WriteLine("ADD PRESSED");
+                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "-")
             {
                 operationMode = "subtract";
+                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "×")
             {
                 operationMode = "multiply";
+                operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "÷")
             {
                 operationMode = "divide";
+                operationStage = OperationStage.EnterSecondOperand;
             }
             mathOperator = pressed;
             resultText.Text = pressed;
@@ -82,7 +85,7 @@ namespace App1
         {
             int valueFirstOperand = int.Parse(firstOperand);
             int valueSecondOperand = int.Parse(secondOperand);
-            int resultValue;
+            int resultValue=0;
 
             if (operationMode == "add")
             {
@@ -101,12 +104,9 @@ namespace App1
                 resultValue = valueFirstOperand / valueSecondOperand;
             }
 
-
-            resultValue = int.Parse(firstOperand) + int.Parse(secondOperand);
             string resultString = resultValue.ToString();
-            firstOperand = resultString;
             resultText.Text = resultString;
-            operationStage = 3;
+            operationStage = OperationStage.DisplayResult;
         }
 
         private void OnEnterOperand(object sender, EventArgs e)
@@ -115,13 +115,13 @@ namespace App1
             string operand = button.Text;
 
 
-            if (operationStage == 0)
+            if (operationStage==OperationStage.EnterFirstOperand)
             {
                 firstOperand += operand;
                 resultText.Text = firstOperand;
                 //resultText.Text = "8";
             }
-            if (operationStage == 3)
+            if (operationStage==OperationStage.EnterSecondOperand)
             {
                 secondOperand += operand;
                 resultText.Text = secondOperand;
