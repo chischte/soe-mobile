@@ -8,8 +8,10 @@ using Xamarin.Forms;
 
 namespace App1
 {
-
-    // Fix Bug + = Crashes the app
+    // Implement decimals
+    // Fix Bug double dot possible
+    // implement percentage
+    // Add colord
 
     public partial class MainPage : ContentPage
     {
@@ -19,6 +21,7 @@ namespace App1
         {
             InitializeComponent();
             this.calculator = calculator;
+            resultText.Text = "0";
 
         }
         enum OperationStage
@@ -38,8 +41,8 @@ namespace App1
 
         private OperationStage operationStage = OperationStage.EnterFirstOperand;
         private OperationMode operationMode = OperationMode.Add;
-        string firstOperand;
-        string secondOperand;
+        private string firstOperand = "0";
+        string secondOperand = "0";
         string resultString;
 
         public string Name { get; set; }
@@ -64,27 +67,20 @@ namespace App1
             Button button = (Button)sender;
             string pressed = button.Text;
 
-
-            // Continue a new Calculation:
-            if (operationStage == OperationStage.EnterFirstOperand)
-            {
-                secondOperand = "";
-            }
-
             // Continue with a Result:
             if (operationStage == OperationStage.DisplayResult)
             {
                 firstOperand = resultString;
-                secondOperand = "";
             }
 
             // Continue a chained Calculation 
             if (operationStage == OperationStage.EnterSecondOperand)
             {
                 CalculateResult();
-                secondOperand = "";
+
             }
             operationStage = OperationStage.EnterSecondOperand;
+            secondOperand = "";
 
 
             if (pressed == "+")
@@ -137,11 +133,24 @@ namespace App1
 
         private void CalculateResult()
         {
+            // Fix Bugs Crashing when Operand Strings are empty
+            if (firstOperand == "")
+            {
+                firstOperand = "0";
+            }
+            if (secondOperand == "")
+            {
+                secondOperand = "0";
+            }
+
+
             double valueFirstOperand = Convert.ToDouble(firstOperand);
             double valueSecondOperand = Convert.ToDouble(secondOperand);
             double resultValue = 0;
 
             operationStage = OperationStage.DisplayResult;
+
+
 
             if (operationMode == OperationMode.Add)
             {
