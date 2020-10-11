@@ -11,6 +11,14 @@ namespace App1
 
     public partial class MainPage : ContentPage
     {
+        private Calculator calculator;
+
+        public MainPage(Calculator calculator)
+        {
+            InitializeComponent();
+            this.calculator = calculator;
+
+        }
         enum OperationStage
         {
             EnterFirstOperand = 0,   // Stay in this state until an operator is pressed
@@ -20,24 +28,22 @@ namespace App1
 
         string mathOperator;
         OperationStage operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
-                                // 1 = enter operator ...
-                                // 2 = enter second operand
-                                // 3 = display result
+                                           // 1 = enter operator ...
+                                           // 2 = enter second operand
+                                           // 3 = display result
         string firstOperand;
         string secondOperand;
         string operationMode; //add / subtract / multiply / divide
         public string Name { get; set; }
 
-        private ICalculator calculator;
 
-        //public MainPage(ICalculator calculator)
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+
+
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
+            int loerere = calculator.GetResult();
+            Console.WriteLine(loerere);
             resultText.Text = "0";
             firstOperand = "";
             secondOperand = "";
@@ -58,7 +64,7 @@ namespace App1
             string pressed = button.Text;
             if (pressed == "+")
             {
-                operationMode = "add"; 
+                operationMode = "add";
                 Console.WriteLine("ADD PRESSED");
                 operationStage = OperationStage.EnterSecondOperand;
             }
@@ -85,7 +91,7 @@ namespace App1
         {
             int valueFirstOperand = int.Parse(firstOperand);
             int valueSecondOperand = int.Parse(secondOperand);
-            int resultValue=0;
+            int resultValue = 0;
 
             if (operationMode == "add")
             {
@@ -115,13 +121,13 @@ namespace App1
             string operand = button.Text;
 
 
-            if (operationStage==OperationStage.EnterFirstOperand)
+            if (operationStage == OperationStage.EnterFirstOperand)
             {
                 firstOperand += operand;
                 resultText.Text = firstOperand;
                 //resultText.Text = "8";
             }
-            if (operationStage==OperationStage.EnterSecondOperand)
+            if (operationStage == OperationStage.EnterSecondOperand)
             {
                 secondOperand += operand;
                 resultText.Text = secondOperand;
