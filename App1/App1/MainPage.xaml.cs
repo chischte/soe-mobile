@@ -42,7 +42,7 @@ namespace App1
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            int loerere = calculator.GetResult();
+            double loerere = calculator.GetResult();
             Console.WriteLine(loerere);
             resultText.Text = "0";
             firstOperand = "";
@@ -52,7 +52,7 @@ namespace App1
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
-            int loesch = calculator.GetResult();
+            double loesch = calculator.GetResult();
             Console.WriteLine(loesch);
 
 

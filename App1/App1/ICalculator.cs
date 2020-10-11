@@ -6,6 +6,6 @@ namespace App1
 {
     public interface ICalculator
     {
-        int GetResult();
+        double GetResult();
     }
 }

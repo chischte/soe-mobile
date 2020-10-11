@@ -6,9 +6,13 @@ namespace App1
 {
    public class Calculator:ICalculator
     {
-        public int GetResult()
+        double firstOperand = 1.55;
+        double secondOperand= 1.67;
+
+        public double GetResult()
         {
-            return 555;
+            double result = firstOperand + secondOperand;
+            return result;
         }
 
 
