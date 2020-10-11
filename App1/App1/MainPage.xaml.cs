@@ -26,7 +26,8 @@ namespace App1
             DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
         }
 
-        string mathOperator;
+
+
         OperationStage operationStage = 0; // 0 = enter first  operand ...stay in this state until an operator is pressed
                                            // 1 = enter operator ...
                                            // 2 = enter second operand
@@ -37,13 +38,10 @@ namespace App1
         public string Name { get; set; }
 
 
-
-
-
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            double loerere = calculator.GetResult();
-            Console.WriteLine(loerere);
+           // double loerere = calculator.GetResult();
+           // Console.WriteLine(loerere);
             resultText.Text = "0";
             firstOperand = "";
             secondOperand = "";
@@ -52,8 +50,8 @@ namespace App1
 
         private void Button_plus_minus(object sender, EventArgs e)
         {
-            double loesch = calculator.GetResult();
-            Console.WriteLine(loesch);
+            //double loesch = calculator.GetResult();
+            //Console.WriteLine(loesch);
 
 
         }
@@ -62,10 +60,10 @@ namespace App1
         {
             Button button = (Button)sender;
             string pressed = button.Text;
+           
             if (pressed == "+")
             {
                 operationMode = "add";
-                Console.WriteLine("ADD PRESSED");
                 operationStage = OperationStage.EnterSecondOperand;
             }
             if (pressed == "-")
@@ -83,7 +81,6 @@ namespace App1
                 operationMode = "divide";
                 operationStage = OperationStage.EnterSecondOperand;
             }
-            mathOperator = pressed;
             resultText.Text = pressed;
         }
 

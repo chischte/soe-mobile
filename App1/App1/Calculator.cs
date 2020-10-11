@@ -4,17 +4,28 @@ using System.Text;
 
 namespace App1
 {
-   public class Calculator:ICalculator
+    public class Calculator : ICalculator
     {
-        double firstOperand = 1.55;
-        double secondOperand= 1.67;
-
-        public double GetResult()
+        public double Add(double firstOperand, double secondOperand)
         {
             double result = firstOperand + secondOperand;
             return result;
         }
-
+        public double Subtract(double firstOperand, double secondOperand)
+        {
+            double result = firstOperand - secondOperand;
+            return result;
+        }
+        public double Multiply(double firstOperand, double secondOperand)
+        {
+            double result = firstOperand * secondOperand;
+            return result;
+        }
+        public double Divide(double firstOperand, double secondOperand)
+        {
+            double result = firstOperand / secondOperand;
+            return result;
+        }
 
     }
 }
