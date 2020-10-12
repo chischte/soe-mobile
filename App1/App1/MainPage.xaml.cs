@@ -8,10 +8,9 @@ using Xamarin.Forms;
 
 namespace App1
 {
-    // Implement decimals
-    // Fix Bug double dot possible
     // implement percentage
-    // Add colord
+    // fix bug display 08 after first entry of 8
+    // Add colors
 
     public partial class MainPage : ContentPage
     {
@@ -38,11 +37,17 @@ namespace App1
             Divide = 3
         }
 
-        private OperationStage operationStage = OperationStage.EnterFirstOperand;
-        private OperationMode operationMode = OperationMode.Add;
-        private string firstOperand = "0";
-        string secondOperand = "0";
-        string resultString;
+        private OperationStage _operationStage = OperationStage.EnterFirstOperand;
+        private OperationMode _operationMode = OperationMode.Add;
+        
+        private string _firstOperandString = "0";
+        private string _secondOperandString = "0";
+        
+        private double _firstOperandDouble = 0;
+        private double _secondOperandDouble = 0;
+
+
+        private string _resultString;
 
         public string Name { get; set; }
 
@@ -50,10 +55,12 @@ namespace App1
         private void Button_C_Clicked(object sender, EventArgs e)
         {
             resultText.Text = "0";
-            firstOperand = "";
-            secondOperand = "";
-            resultString = "";
-            operationStage = OperationStage.EnterFirstOperand;
+            _firstOperandString = "";
+            _secondOperandString = "";
+            _firstOperandDouble = 0;
+            _secondOperandDouble = 0;
+            _resultString = "";
+            _operationStage = OperationStage.EnterFirstOperand;
         }
 
 
@@ -67,36 +74,36 @@ namespace App1
             string pressed = button.Text;
 
             // Continue with a Result:
-            if (operationStage == OperationStage.DisplayResult)
+            if (_operationStage == OperationStage.DisplayResult)
             {
-                firstOperand = resultString;
+                _firstOperandString = _resultString;
             }
 
             // Continue a chained Calculation 
-            if (operationStage == OperationStage.EnterSecondOperand)
+            if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 CalculateResult();
 
             }
-            operationStage = OperationStage.EnterSecondOperand;
-            secondOperand = "";
+            _operationStage = OperationStage.EnterSecondOperand;
+            _secondOperandString = "";
 
 
             if (pressed == "+")
             {
-                operationMode = OperationMode.Add;
+                _operationMode = OperationMode.Add;
             }
             if (pressed == "-")
             {
-                operationMode = OperationMode.Subtract;
+                _operationMode = OperationMode.Subtract;
             }
             if (pressed == "×")
             {
-                operationMode = OperationMode.Multiply;
+                _operationMode = OperationMode.Multiply;
             }
             if (pressed == "÷")
             {
-                operationMode = OperationMode.Divide;
+                _operationMode = OperationMode.Divide;
             }
             resultText.Text = pressed;
         }
@@ -109,67 +116,88 @@ namespace App1
             string operand = button.Text;
 
 
-            if (operationStage == OperationStage.EnterFirstOperand)
+            if (_operationStage == OperationStage.EnterFirstOperand)
             {
-                firstOperand += operand;
-                resultText.Text = firstOperand;
+                _firstOperandString += operand;
+                resultText.Text = _firstOperandString;
             }
-            if (operationStage == OperationStage.EnterSecondOperand)
+            if (_operationStage == OperationStage.EnterSecondOperand)
             {
-                secondOperand += operand;
-                resultText.Text = secondOperand;
+                _secondOperandString += operand;
+                resultText.Text = _secondOperandString;
             }
 
-            if (operationStage == OperationStage.DisplayResult)
+            if (_operationStage == OperationStage.DisplayResult)
             {
-                operationStage = OperationStage.EnterFirstOperand;
-                firstOperand = operand;
-                secondOperand = "";
+                _operationStage = OperationStage.EnterFirstOperand;
+                _firstOperandString = operand;
+                _secondOperandString = "";
 
             }
 
         }
 
-        private void CalculateResult()
+        private bool convertStringsToDouble()
+        {
+            bool convertionIsSuccess = true;
+            try
+            {
+                _firstOperandDouble = Convert.ToDouble(_firstOperandString);
+                _secondOperandDouble = Convert.ToDouble(_secondOperandString);
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+                resultText.Text = "INVALID ENTRY";
+                convertionIsSuccess = false;
+            }
+            return convertionIsSuccess;
+        }
+
+        private void getResultFromCalculator()
         {
             // Fix Bugs Crashing when Operand Strings are empty
-            if (firstOperand == "")
+            if (_firstOperandString == "")
             {
-                firstOperand = "0";
+                _firstOperandString = "0";
             }
-            if (secondOperand == "")
+            if (_secondOperandString == "")
             {
-                secondOperand = "0";
+                _secondOperandString = "0";
             }
+            _operationStage = OperationStage.DisplayResult;
 
-
-            double valueFirstOperand = Convert.ToDouble(firstOperand);
-            double valueSecondOperand = Convert.ToDouble(secondOperand);
             double resultValue = 0;
 
-            operationStage = OperationStage.DisplayResult;
 
+            if (_operationMode == OperationMode.Add)
+            {
+                resultValue = _calculator.Add(_firstOperandDouble, _secondOperandDouble);
+            }
+            if (_operationMode == OperationMode.Subtract)
+            {
+                resultValue = _calculator.Subtract(_firstOperandDouble, _secondOperandDouble);
+            }
+            if (_operationMode == OperationMode.Multiply)
+            {
+                resultValue = _calculator.Multiply(_firstOperandDouble, _secondOperandDouble);
+            }
+            if (_operationMode == OperationMode.Divide)
+            {
+                resultValue = _calculator.Divide(_firstOperandDouble, _secondOperandDouble);
+            }
+            _resultString = resultValue.ToString();
+            _firstOperandString = _resultString;
+            resultText.Text = _resultString;
 
+        }
 
-            if (operationMode == OperationMode.Add)
+        private void CalculateResult()
+        {
+            if (convertStringsToDouble())
             {
-                resultValue = _calculator.Add(valueFirstOperand, valueSecondOperand);
+                getResultFromCalculator();
             }
-            if (operationMode == OperationMode.Subtract)
-            {
-                resultValue = _calculator.Subtract(valueFirstOperand, valueSecondOperand);
-            }
-            if (operationMode == OperationMode.Multiply)
-            {
-                resultValue = _calculator.Multiply(valueFirstOperand, valueSecondOperand);
-            }
-            if (operationMode == OperationMode.Divide)
-            {
-                resultValue = _calculator.Divide(valueFirstOperand, valueSecondOperand);
-            }
-            resultString = resultValue.ToString();
-            firstOperand = resultString;
-            resultText.Text = resultString;
         }
 
 
