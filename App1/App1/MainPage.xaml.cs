@@ -39,10 +39,10 @@ namespace App1
 
         private OperationStage _operationStage = OperationStage.EnterFirstOperand;
         private OperationMode _operationMode = OperationMode.Add;
-        
+
         private string _firstOperandString = "0";
         private string _secondOperandString = "0";
-        
+
         private double _firstOperandDouble = 0;
         private double _secondOperandDouble = 0;
 
@@ -110,7 +110,8 @@ namespace App1
 
 
 
-        private void OnEnterOperand(object sender, EventArgs e)
+
+        private void OnEnterNumber(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string operand = button.Text;
@@ -118,6 +119,10 @@ namespace App1
 
             if (_operationStage == OperationStage.EnterFirstOperand)
             {
+                if (_firstOperandString == "0")
+                {
+                    _firstOperandString = "";
+                }
                 _firstOperandString += operand;
                 resultText.Text = _firstOperandString;
             }
@@ -137,7 +142,25 @@ namespace App1
 
         }
 
-        private bool convertStringsToDouble()
+        private void OnDotClicked(object sender, EventArgs e)
+        {
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                if (!_firstOperandString.Contains("."))
+                {
+                    _firstOperandString += ".";
+                    resultText.Text = _firstOperandString;
+                }
+            }
+            if (_operationStage == OperationStage.EnterSecondOperand)
+                if (!_secondOperandString.Contains("."))
+                {
+                    _secondOperandString += ".";
+                    resultText.Text = _secondOperandString;
+                }
+        }
+
+        private bool ConvertStringsToDouble()
         {
             bool convertionIsSuccess = true;
             try
@@ -154,7 +177,7 @@ namespace App1
             return convertionIsSuccess;
         }
 
-        private void getResultFromCalculator()
+        private void GetResultFromCalculator()
         {
             // Fix Bugs Crashing when Operand Strings are empty
             if (_firstOperandString == "")
@@ -194,9 +217,9 @@ namespace App1
 
         private void CalculateResult()
         {
-            if (convertStringsToDouble())
+            if (ConvertStringsToDouble())
             {
-                getResultFromCalculator();
+                GetResultFromCalculator();
             }
         }
 
@@ -205,5 +228,6 @@ namespace App1
         {
             CalculateResult();
         }
+
     }
 }
