@@ -9,7 +9,6 @@ using Xamarin.Forms;
 namespace App1
 {
     // implement percentage
-    // implement +/-
     // Add colors
 
     public partial class MainPage : ContentPage
@@ -45,9 +44,33 @@ namespace App1
 
         private double _firstOperandDouble;
         private double _secondOperandDouble;
-        
+
         private string _resultString;
-        
+        private String GetCurrentOperand()
+        {
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                return _firstOperandString;
+            }
+            else // OperationStage is "EnterSecondOperand
+            {
+                return _secondOperandString;
+            }
+        }
+
+        private void SetCurrentOperand(String currentString)
+        {
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                _firstOperandString = currentString;
+            }
+            if (_operationStage == OperationStage.EnterSecondOperand)
+            {
+                _secondOperandString = currentString;
+            }
+
+        }
+
         private void Button_C_Clicked(object sender, EventArgs e)
         {
             resultText.Text = "0";
@@ -62,33 +85,21 @@ namespace App1
 
         private void OnPlusMinusClicked(object sender, EventArgs e)
         {
-
-
-        }
-
-        private String GetCurrentString()
-        {
-            if (_operationStage == OperationStage.EnterFirstOperand)
+            if (!(_operationStage == OperationStage.DisplayResult))
             {
-                return _firstOperandString;
-            }
-            else // OperationStage is "EnterSecondOperand
-            {
-                return _secondOperandString;
-            }
-        }
+                string currentOperand = GetCurrentOperand();
+                if (currentOperand.Contains("-"))
+                {
+                    currentOperand = currentOperand.Remove(0, 1);
+                }
+                else
+                {
+                    currentOperand = currentOperand.Insert(0, "-");
+                }
 
-        private void SetCurrentString(String currentString)
-        {
-            if (_operationStage == OperationStage.EnterFirstOperand)
-            {
-                _firstOperandString = currentString;
+                SetCurrentOperand(currentOperand);
+                resultText.Text = GetCurrentOperand();
             }
-            if (_operationStage == OperationStage.EnterSecondOperand)
-            {
-                _secondOperandString = currentString;
-            }
-
         }
 
 
@@ -131,9 +142,6 @@ namespace App1
             resultText.Text = pressed;
         }
 
-
-
-
         private void OnEnterNumber(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -143,29 +151,29 @@ namespace App1
             if (_operationStage == OperationStage.DisplayResult)
             {
                 _operationStage = OperationStage.EnterFirstOperand;
-                _firstOperandString = operand;
+                _firstOperandString = "";
                 _secondOperandString = "";
             }
             // Add input to current string
-            string currentOperand = GetCurrentString();
+            string currentOperand = GetCurrentOperand();
             if (currentOperand == "0") { currentOperand = ""; }
             currentOperand += operand;
-            SetCurrentString(currentOperand);
-            resultText.Text = GetCurrentString();
+            SetCurrentOperand(currentOperand);
+            resultText.Text = GetCurrentOperand();
         }
 
         private void OnDotClicked(object sender, EventArgs e)
         {
-            string currentOperand = GetCurrentString();
+            string currentOperand = GetCurrentOperand();
             if (!currentOperand.Contains("."))
             {
                 currentOperand += ".";
-                SetCurrentString(currentOperand);
-                resultText.Text = GetCurrentString();
+                SetCurrentOperand(currentOperand);
+                resultText.Text = GetCurrentOperand();
             }
         }
 
-        private bool ConvertStringsToDouble()
+        private bool ConvertStringsToDoubleWorks()
         {
             bool convertionIsSuccess = true;
             try
@@ -222,12 +230,11 @@ namespace App1
 
         private void CalculateResult()
         {
-            if (ConvertStringsToDouble())
+            if (ConvertStringsToDoubleWorks())
             {
                 GetResultFromCalculator();
             }
         }
-
 
         private void Button_Result_Clicked(object sender, EventArgs e)
         {
