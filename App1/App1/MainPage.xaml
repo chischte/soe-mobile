@@ -46,7 +46,7 @@
         <Button
             Grid.Row="2"
             Grid.Column="1"
-            Clicked="Button_plus_minus"
+            Clicked="OnPlusMinusClicked"
             FontAttributes="Bold"
             FontSize="30"
             Text="+/-"

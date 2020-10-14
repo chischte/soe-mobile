@@ -9,6 +9,7 @@ using Xamarin.Forms;
 namespace App1
 {
     // implement percentage
+    // implement +/-
     // fix bug display 08 after first entry of 8
     // Add colors
 
@@ -43,8 +44,8 @@ namespace App1
         private string _firstOperandString = "0";
         private string _secondOperandString = "0";
 
-        private double _firstOperandDouble = 0;
-        private double _secondOperandDouble = 0;
+        private double _firstOperandDouble;
+        private double _secondOperandDouble;
 
 
         private string _resultString;
@@ -64,9 +65,37 @@ namespace App1
         }
 
 
-        private void Button_plus_minus(object sender, EventArgs e)
+        private void OnPlusMinusClicked(object sender, EventArgs e)
         {
+
+
         }
+
+        private String GetCurrentString()
+        {
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                return _firstOperandString;
+            }
+            else // OperationStage is "EnterSecondOperand
+            {
+                return _secondOperandString;
+            }
+        }
+
+        private void SetCurrentString(String currentString)
+        {
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                _firstOperandString = currentString;
+            }
+            if (_operationStage == OperationStage.EnterSecondOperand)
+            {
+                _secondOperandString = currentString;
+            }
+
+        }
+
 
         private void OnSelectOperation(object sender, EventArgs e)
         {
@@ -83,7 +112,6 @@ namespace App1
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 CalculateResult();
-
             }
             _operationStage = OperationStage.EnterSecondOperand;
             _secondOperandString = "";
@@ -116,48 +144,33 @@ namespace App1
             Button button = (Button)sender;
             string operand = button.Text;
 
-
-            if (_operationStage == OperationStage.EnterFirstOperand)
-            {
-                if (_firstOperandString == "0")
-                {
-                    _firstOperandString = "";
-                }
-                _firstOperandString += operand;
-                resultText.Text = _firstOperandString;
-            }
-            if (_operationStage == OperationStage.EnterSecondOperand)
-            {
-                _secondOperandString += operand;
-                resultText.Text = _secondOperandString;
-            }
-
+            // Start calculation Chaining
             if (_operationStage == OperationStage.DisplayResult)
             {
                 _operationStage = OperationStage.EnterFirstOperand;
                 _firstOperandString = operand;
                 _secondOperandString = "";
-
             }
-
+            // Add input to current string
+            string currentOperand = GetCurrentString();
+            if (currentOperand == "0")
+            {
+                SetCurrentString("");
+            }
+            currentOperand += operand;
+            SetCurrentString(currentOperand);
+            resultText.Text = GetCurrentString();
         }
 
         private void OnDotClicked(object sender, EventArgs e)
         {
-            if (_operationStage == OperationStage.EnterFirstOperand)
+            string currentOperand = GetCurrentString();
+            if (!currentOperand.Contains("."))
             {
-                if (!_firstOperandString.Contains("."))
-                {
-                    _firstOperandString += ".";
-                    resultText.Text = _firstOperandString;
-                }
+                currentOperand += ".";
+                SetCurrentString(currentOperand);
+                resultText.Text = GetCurrentString();
             }
-            if (_operationStage == OperationStage.EnterSecondOperand)
-                if (!_secondOperandString.Contains("."))
-                {
-                    _secondOperandString += ".";
-                    resultText.Text = _secondOperandString;
-                }
         }
 
         private bool ConvertStringsToDouble()
