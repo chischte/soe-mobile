@@ -10,7 +10,6 @@ namespace App1
 {
     // implement percentage
     // implement +/-
-    // fix bug display 08 after first entry of 8
     // Add colors
 
     public partial class MainPage : ContentPage
@@ -46,13 +45,9 @@ namespace App1
 
         private double _firstOperandDouble;
         private double _secondOperandDouble;
-
-
+        
         private string _resultString;
-
-        public string Name { get; set; }
-
-
+        
         private void Button_C_Clicked(object sender, EventArgs e)
         {
             resultText.Text = "0";
@@ -153,10 +148,7 @@ namespace App1
             }
             // Add input to current string
             string currentOperand = GetCurrentString();
-            if (currentOperand == "0")
-            {
-                SetCurrentString("");
-            }
+            if (currentOperand == "0") { currentOperand = ""; }
             currentOperand += operand;
             SetCurrentString(currentOperand);
             resultText.Text = GetCurrentString();
