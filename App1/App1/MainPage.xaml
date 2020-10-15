@@ -4,10 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Grid>
+    <Grid BackgroundColor="DarkBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -24,167 +23,184 @@
         <Label
             x:Name="resultText"
             Grid.Row="0"
-            Grid.RowSpan="4"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Margin="2"
-            BackgroundColor="black"
+            Grid.ColumnSpan="4"
+            BackgroundColor="LightGray"
             FontAttributes="Bold"
-            FontSize="40"
-            HorizontalOptions="Center"
-            Text="{Binding Name}"
-            TextColor="Yellow"
-            VerticalOptions="Center" />
+            FontSize="50"
+            HorizontalTextAlignment="End"
+            TextColor="Black"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
         <Button
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="0"
+            BackgroundColor="Gray"
             Clicked="Button_C_Clicked"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="C"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
+            BackgroundColor="Gray"
             Clicked="OnPlusMinusClicked"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="+/-"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="2"
+            BackgroundColor="Gray"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="%"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="3"
+            BackgroundColor="Orange"
             Clicked="OnSelectOperation"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="÷"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="0"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="7"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="1"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="8"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="2"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="9"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="3"
+            BackgroundColor="Orange"
             Clicked="OnSelectOperation"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="×"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="0"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="4"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="1"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="5"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="2"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="6"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="3"
+            BackgroundColor="Orange"
             Clicked="OnSelectOperation"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="-"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="0"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="1"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="1"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="2"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="2"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="3"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="3"
+            BackgroundColor="Orange"
             Clicked="OnSelectOperation"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="+"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="0"
             Grid.ColumnSpan="2"
+            BackgroundColor="LightGray"
             Clicked="OnEnterNumber"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="0"
             VerticalOptions="Center" />
         <Button
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="2"
+            BackgroundColor="LightGray"
             Clicked="OnDotClicked"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="."
             VerticalOptions="Center" />
         <Button
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="3"
+            BackgroundColor="Orange"
             Clicked="Button_Result_Clicked"
             FontAttributes="Bold"
-            FontSize="30"
+            FontSize="40"
             Text="="
             VerticalOptions="Center" />
     </Grid>

@@ -8,8 +8,9 @@ using Xamarin.Forms;
 
 namespace App1
 {
-    // implement percentage
-    // Add colors
+    // Implement percentage
+    // Compare layout with example from teacher
+    // Fix bug "C" "-3" = Invalid Entry
 
     public partial class MainPage : ContentPage
     {
