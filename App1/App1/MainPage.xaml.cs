@@ -9,6 +9,7 @@ using Xamarin.Forms;
 
 namespace App1
 {
+    // FIX bug +/- does not work on displayed result
 
     public partial class MainPage : ContentPage
     {
@@ -54,9 +55,13 @@ namespace App1
             {
                 return _firstOperandString;
             }
-            else // OperationStage is "EnterSecondOperand
+            if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 return _secondOperandString;
+            }
+            else
+            {
+                return _resultString;
             }
         }
 
@@ -70,6 +75,10 @@ namespace App1
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 _secondOperandString = currentString;
+            }
+            if (_operationStage == OperationStage.DisplayResult)
+            {
+                _resultString = currentString;
             }
 
         }
@@ -262,54 +271,38 @@ namespace App1
 
         private void OnPercentageClicked(object sender, EventArgs e)
         {
+            string stringDividedBy100 = DivideStringBy100(GetCurrentOperand());
             if (_operationStage == OperationStage.EnterFirstOperand)
             {
-                try
-                {
-                    _firstOperandDouble = Convert.ToDouble(_firstOperandString);
-                    _firstOperandString = (_firstOperandDouble / 100).ToString();
-                    displayText.Text = _firstOperandString;
-                }
-                catch (System.FormatException)
-                {
-                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
-                    displayText.Text = "INVALID ENTRY";
-                }
-
+                _firstOperandString = stringDividedBy100;
             }
 
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
-                try
-                {
-                    _secondOperandDouble = Convert.ToDouble(_secondOperandString);
-                    _secondOperandString = (_secondOperandDouble / 100).ToString();
-                    displayText.Text = _secondOperandString;
-                }
-                catch (System.FormatException)
-                {
-                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
-                    displayText.Text = "INVALID ENTRY";
-                }
-
-
-
+                _secondOperandString = stringDividedBy100;
             }
 
             if (_operationStage == OperationStage.DisplayResult)
             {
-                try
-                {
-                    _resultDouble = Convert.ToDouble(_resultString);
-                    _resultString = (_resultDouble / 100).ToString();
-                    displayText.Text = _resultString;
-                }
-                catch (System.FormatException)
-                {
-                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
-                    displayText.Text = "INVALID ENTRY";
-                }
+                _resultString = stringDividedBy100;
             }
+            displayText.Text = stringDividedBy100;
+        }
+
+        private string DivideStringBy100(string inputString)
+        {
+            string outputString = "0";
+            try
+            {
+                double inputDouble = Convert.ToDouble(inputString);
+                outputString = (inputDouble / 100).ToString();
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+                displayText.Text = "INVALID ENTRY";
+            }
+            return outputString;
         }
     }
 }
