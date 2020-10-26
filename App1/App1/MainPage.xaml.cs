@@ -9,7 +9,6 @@ using Xamarin.Forms;
 namespace App1
 {
     // Implement percentage
-    // Compare layout with example from teacher
     // Fix bug "C" "-3" = Invalid Entry
 
     public partial class MainPage : ContentPage
@@ -82,8 +81,7 @@ namespace App1
             _resultString = "";
             _operationStage = OperationStage.EnterFirstOperand;
         }
-
-
+        
         private void OnPlusMinusClicked(object sender, EventArgs e)
         {
             if (!(_operationStage == OperationStage.DisplayResult))
@@ -102,8 +100,7 @@ namespace App1
                 resultText.Text = GetCurrentOperand();
             }
         }
-
-
+        
         private void OnSelectOperation(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -193,7 +190,7 @@ namespace App1
 
         private void GetResultFromCalculator()
         {
-            // Fix Bugs Crashing when Operand Strings are empty
+            // Fix Bugs Crashing when Operand Strings are empty:
             if (_firstOperandString == "")
             {
                 _firstOperandString = "0";
@@ -242,5 +239,10 @@ namespace App1
             CalculateResult();
         }
 
+        private void OnPercentageClicked(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }
