@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +9,24 @@ using Xamarin.Forms;
 
 namespace App1
 {
-    // Implement percentage
-    // Fix bug "C" "-3" = Invalid Entry
 
     public partial class MainPage : ContentPage
     {
         private readonly ICalculator _calculator;
+
         public MainPage(ICalculator calculator)
         {
             InitializeComponent();
             _calculator = calculator;
-            resultText.Text = "0";
+            displayText.Text = "0";
 
         }
+
         enum OperationStage
         {
-            EnterFirstOperand = 0,   // Stay in this state until an operator is pressed
-            EnterSecondOperand = 1,  // Stay in this state until result is pressed
-            DisplayResult = 2       // Continue depending on what button (operation / number / result) is pushed
+            EnterFirstOperand = 0, // Stay in this state until an operator is pressed
+            EnterSecondOperand = 1, // Stay in this state until result is pressed
+            DisplayResult = 2 // Continue depending on what button (operation / number / result) is pushed
         }
 
         enum OperationMode
@@ -41,11 +42,12 @@ namespace App1
 
         private string _firstOperandString = "0";
         private string _secondOperandString = "0";
+        private string _resultString;
 
         private double _firstOperandDouble;
         private double _secondOperandDouble;
+        private double _resultDouble;
 
-        private string _resultString;
         private String GetCurrentOperand()
         {
             if (_operationStage == OperationStage.EnterFirstOperand)
@@ -64,6 +66,7 @@ namespace App1
             {
                 _firstOperandString = currentString;
             }
+
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 _secondOperandString = currentString;
@@ -73,15 +76,15 @@ namespace App1
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            resultText.Text = "0";
-            _firstOperandString = "";
+            displayText.Text = "0";
+            _firstOperandString = "0";
             _secondOperandString = "";
             _firstOperandDouble = 0;
             _secondOperandDouble = 0;
             _resultString = "";
             _operationStage = OperationStage.EnterFirstOperand;
         }
-        
+
         private void OnPlusMinusClicked(object sender, EventArgs e)
         {
             if (!(_operationStage == OperationStage.DisplayResult))
@@ -97,10 +100,10 @@ namespace App1
                 }
 
                 SetCurrentOperand(currentOperand);
-                resultText.Text = GetCurrentOperand();
+                displayText.Text = GetCurrentOperand();
             }
         }
-        
+
         private void OnSelectOperation(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -112,11 +115,13 @@ namespace App1
                 _firstOperandString = _resultString;
             }
 
-            // Continue a chained Calculation 
+            // Continue a chained Calculation:
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 CalculateResult();
             }
+
+            // Jump to enter second operand:
             _operationStage = OperationStage.EnterSecondOperand;
             _secondOperandString = "";
 
@@ -125,19 +130,23 @@ namespace App1
             {
                 _operationMode = OperationMode.Add;
             }
+
             if (pressed == "-")
             {
                 _operationMode = OperationMode.Subtract;
             }
+
             if (pressed == "×")
             {
                 _operationMode = OperationMode.Multiply;
             }
+
             if (pressed == "÷")
             {
                 _operationMode = OperationMode.Divide;
             }
-            resultText.Text = pressed;
+
+            displayText.Text = pressed;
         }
 
         private void OnEnterNumber(object sender, EventArgs e)
@@ -152,12 +161,17 @@ namespace App1
                 _firstOperandString = "";
                 _secondOperandString = "";
             }
+
             // Add input to current string
             string currentOperand = GetCurrentOperand();
-            if (currentOperand == "0") { currentOperand = ""; }
+            if (currentOperand == "0")
+            {
+                currentOperand = "";
+            }
+
             currentOperand += operand;
             SetCurrentOperand(currentOperand);
-            resultText.Text = GetCurrentOperand();
+            displayText.Text = GetCurrentOperand();
         }
 
         private void OnDotClicked(object sender, EventArgs e)
@@ -167,7 +181,7 @@ namespace App1
             {
                 currentOperand += ".";
                 SetCurrentOperand(currentOperand);
-                resultText.Text = GetCurrentOperand();
+                displayText.Text = GetCurrentOperand();
             }
         }
 
@@ -182,9 +196,10 @@ namespace App1
             catch (System.FormatException)
             {
                 Console.WriteLine("SYSTEM FORMAT EXCEPTION");
-                resultText.Text = "INVALID ENTRY";
+                displayText.Text = "INVALID ENTRY";
                 convertionIsSuccess = false;
             }
+
             return convertionIsSuccess;
         }
 
@@ -195,10 +210,12 @@ namespace App1
             {
                 _firstOperandString = "0";
             }
+
             if (_secondOperandString == "")
             {
                 _secondOperandString = "0";
             }
+
             _operationStage = OperationStage.DisplayResult;
 
             double resultValue = 0;
@@ -208,21 +225,25 @@ namespace App1
             {
                 resultValue = _calculator.Add(_firstOperandDouble, _secondOperandDouble);
             }
+
             if (_operationMode == OperationMode.Subtract)
             {
                 resultValue = _calculator.Subtract(_firstOperandDouble, _secondOperandDouble);
             }
+
             if (_operationMode == OperationMode.Multiply)
             {
                 resultValue = _calculator.Multiply(_firstOperandDouble, _secondOperandDouble);
             }
+
             if (_operationMode == OperationMode.Divide)
             {
                 resultValue = _calculator.Divide(_firstOperandDouble, _secondOperandDouble);
             }
+
             _resultString = resultValue.ToString();
             _firstOperandString = _resultString;
-            resultText.Text = _resultString;
+            displayText.Text = _resultString;
 
         }
 
@@ -241,8 +262,54 @@ namespace App1
 
         private void OnPercentageClicked(object sender, EventArgs e)
         {
-            
+            if (_operationStage == OperationStage.EnterFirstOperand)
+            {
+                try
+                {
+                    _firstOperandDouble = Convert.ToDouble(_firstOperandString);
+                    _firstOperandString = (_firstOperandDouble / 100).ToString();
+                    displayText.Text = _firstOperandString;
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+                    displayText.Text = "INVALID ENTRY";
+                }
 
+            }
+
+            if (_operationStage == OperationStage.EnterSecondOperand)
+            {
+                try
+                {
+                    _secondOperandDouble = Convert.ToDouble(_secondOperandString);
+                    _secondOperandString = (_secondOperandDouble / 100).ToString();
+                    displayText.Text = _secondOperandString;
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+                    displayText.Text = "INVALID ENTRY";
+                }
+
+
+
+            }
+
+            if (_operationStage == OperationStage.DisplayResult)
+            {
+                try
+                {
+                    _resultDouble = Convert.ToDouble(_resultString);
+                    _resultString = (_resultDouble / 100).ToString();
+                    displayText.Text = _resultString;
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+                    displayText.Text = "INVALID ENTRY";
+                }
+            }
         }
     }
 }
