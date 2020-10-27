@@ -103,7 +103,7 @@ namespace App1
                 {
                     currentOperand = currentOperand.Remove(0, 1);
                 }
-                else
+                else if (currentOperand!="0")
                 {
                     currentOperand = currentOperand.Insert(0, "-");
                 }
