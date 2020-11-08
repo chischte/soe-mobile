@@ -6,10 +6,10 @@ namespace App1
 {
     public interface ICalculator
     {
-        double FirstOperand { get; set; }
-        double SecondOperand { get; set; }
+        Operand FirstOperand { get; set; }
+        Operand SecondOperand { get; set; }
         double Result { get; set; }
-
+        
         double Add();
         double Subtract();
         double Multiply();
