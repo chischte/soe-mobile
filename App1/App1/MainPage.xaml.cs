@@ -22,6 +22,16 @@ namespace App1
             displayText.Text = "0";
 
         }
+        // FIELDS ---------------------------------------------------------------------------------
+
+        private OperationStage _operationStage = OperationStage.EnterFirstOperand;
+        private OperationMode _operationMode = OperationMode.Add;
+
+        private string _firstOperandString = "0";
+        private string _secondOperandString = "0";
+        private string _resultString;
+
+        // OPERATION MANAGER ----------------------------------------------------------------------
 
         enum OperationStage
         {
@@ -38,71 +48,66 @@ namespace App1
             Divide = 3
         }
 
-        private OperationStage _operationStage = OperationStage.EnterFirstOperand;
-        private OperationMode _operationMode = OperationMode.Add;
-
-        private string _firstOperandString = "0";
-        private string _secondOperandString = "0";
-        private string _resultString;
-
-        private double _firstOperandDouble;
-        private double _secondOperandDouble;
-        private double _resultDouble;
-
+        // GET AND SET CURRENT OPERAND ------------------------------------------------------------
         private String GetCurrentOperand()
         {
+            double _currentOperand = 0;
+            string _currentOperandString = "";
+
             if (_operationStage == OperationStage.EnterFirstOperand)
             {
-                return _firstOperandString;
+                _currentOperand = _calculator.FirstOperand;
             }
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
-                return _secondOperandString;
+                _currentOperand = _calculator.SecondOperand;
             }
             else
             {
-                return _resultString;
+                _currentOperand = _calculator.Result;
             }
+
+            _currentOperandString = _currentOperand.ToString();
+
+            return _currentOperandString;
         }
 
         private void SetCurrentOperand(String currentString)
         {
+
+            double currentOperandDouble = Convert.ToDouble(currentString);
+
             if (_operationStage == OperationStage.EnterFirstOperand)
             {
-                _firstOperandString = currentString;
+                _calculator.FirstOperand = currentOperandDouble;
             }
 
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
-                _secondOperandString = currentString;
+                _calculator.SecondOperand = currentOperandDouble;
             }
             if (_operationStage == OperationStage.DisplayResult)
             {
-                _resultString = currentString;
+                _calculator.Result = currentOperandDouble;
             }
 
         }
+
+
+        // BUTTON FUNCTIONS -----------------------------------------------------------------------
 
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-
-            _calculator.FirstOperand = 4.444;
-            _calculator.SecondOperand = 3.333;
-            displayText.Text = (_calculator.Add(2.0,1.0)).ToString();
-            
+            displayText.Text = "0";
+            //_firstOperandString = "0";
+            //_secondOperandString = "";
+            _calculator.FirstOperand = 0;
+            _calculator.SecondOperand = 0;
+            _calculator.Result = 0;
+            _resultString = "";
+            _operationStage = OperationStage.EnterFirstOperand;
         }
-
-        //private void Button_C_Clicked(object sender, EventArgs e)
-        //{
-        //    displayText.Text = "0";
-        //    _firstOperandString = "0";
-        //    _secondOperandString = "";
-        //    _firstOperandDouble = 0;
-        //    _secondOperandDouble = 0;
-        //    _resultString = "";
-        //    _operationStage = OperationStage.EnterFirstOperand;
-        //}
 
         private void OnPlusMinusClicked(object sender, EventArgs e)
         {
@@ -113,7 +118,7 @@ namespace App1
                 {
                     currentOperand = currentOperand.Remove(0, 1);
                 }
-                else if (currentOperand!="0")
+                else if (currentOperand != "0")
                 {
                     currentOperand = currentOperand.Insert(0, "-");
                 }
@@ -131,18 +136,18 @@ namespace App1
             // Continue with a Result:
             if (_operationStage == OperationStage.DisplayResult)
             {
-                _firstOperandString = _resultString;
+                _calculator.FirstOperand = _calculator.Result;
             }
 
             // Continue a chained Calculation:
             if (_operationStage == OperationStage.EnterSecondOperand)
             {
-                CalculateResult();
+                CalculateAndDisplayResult();
             }
 
             // Jump to enter second operand:
             _operationStage = OperationStage.EnterSecondOperand;
-            _secondOperandString = "";
+            _calculator.SecondOperand = 0;
 
 
             if (pressed == "+")
@@ -177,8 +182,8 @@ namespace App1
             if (_operationStage == OperationStage.DisplayResult)
             {
                 _operationStage = OperationStage.EnterFirstOperand;
-                _firstOperandString = "";
-                _secondOperandString = "";
+                _calculator.FirstOperand = 0;
+                _calculator.SecondOperand = 0;
             }
 
             // Add input to current string
@@ -204,79 +209,20 @@ namespace App1
             }
         }
 
-        private bool ConvertStringsToDoubleWorks()
+        private string DivideStringBy100(string inputString)
         {
-            bool convertionIsSuccess = true;
+            string outputString = "0";
             try
             {
-                _firstOperandDouble = Convert.ToDouble(_firstOperandString);
-                _secondOperandDouble = Convert.ToDouble(_secondOperandString);
+                double inputDouble = Convert.ToDouble(inputString);
+                outputString = (inputDouble / 100).ToString();
             }
             catch (System.FormatException)
             {
                 Console.WriteLine("SYSTEM FORMAT EXCEPTION");
                 displayText.Text = "INVALID ENTRY";
-                convertionIsSuccess = false;
             }
-
-            return convertionIsSuccess;
-        }
-
-        private void GetResultFromCalculator()
-        {
-            // Fix Bugs Crashing when Operand Strings are empty:
-            if (_firstOperandString == "")
-            {
-                _firstOperandString = "0";
-            }
-
-            if (_secondOperandString == "")
-            {
-                _secondOperandString = "0";
-            }
-
-            _operationStage = OperationStage.DisplayResult;
-
-            double resultValue = 0;
-
-
-            if (_operationMode == OperationMode.Add)
-            {
-                resultValue = _calculator.Add(_firstOperandDouble, _secondOperandDouble);
-            }
-
-            if (_operationMode == OperationMode.Subtract)
-            {
-                resultValue = _calculator.Subtract(_firstOperandDouble, _secondOperandDouble);
-            }
-
-            if (_operationMode == OperationMode.Multiply)
-            {
-                resultValue = _calculator.Multiply(_firstOperandDouble, _secondOperandDouble);
-            }
-
-            if (_operationMode == OperationMode.Divide)
-            {
-                resultValue = _calculator.Divide(_firstOperandDouble, _secondOperandDouble);
-            }
-
-            _resultString = resultValue.ToString();
-            _firstOperandString = _resultString;
-            displayText.Text = _resultString;
-
-        }
-
-        private void CalculateResult()
-        {
-            if (ConvertStringsToDoubleWorks())
-            {
-                GetResultFromCalculator();
-            }
-        }
-
-        private void Button_Result_Clicked(object sender, EventArgs e)
-        {
-            CalculateResult();
+            return outputString;
         }
 
         private void OnPercentageClicked(object sender, EventArgs e)
@@ -299,20 +245,79 @@ namespace App1
             displayText.Text = stringDividedBy100;
         }
 
-        private string DivideStringBy100(string inputString)
+
+        // GET RESULT -----------------------------------------------------------------------------
+
+        private void Button_Result_Clicked(object sender, EventArgs e)
         {
-            string outputString = "0";
-            try
-            {
-                double inputDouble = Convert.ToDouble(inputString);
-                outputString = (inputDouble / 100).ToString();
-            }
-            catch (System.FormatException)
-            {
-                Console.WriteLine("SYSTEM FORMAT EXCEPTION");
-                displayText.Text = "INVALID ENTRY";
-            }
-            return outputString;
+            CalculateAndDisplayResult();
         }
+
+
+        //private bool ConvertStringsToDoubleWorks()
+        //{
+        //    bool convertionIsSuccess = true;
+        //    try
+        //    {
+        //        _firstOperandDouble = Convert.ToDouble(_firstOperandString);
+        //        _secondOperandDouble = Convert.ToDouble(_secondOperandString);
+        //    }
+        //    catch (System.FormatException)
+        //    {
+        //        Console.WriteLine("SYSTEM FORMAT EXCEPTION");
+        //        displayText.Text = "INVALID ENTRY";
+        //        convertionIsSuccess = false;
+        //    }
+
+        //    return convertionIsSuccess;
+        //}
+
+
+        //private void CalculateResult()
+        //{
+        //    if (ConvertStringsToDoubleWorks())
+        //    {
+        //        GetResultFromCalculator();
+        //    }
+        //}
+
+
+
+        private void CalculateAndDisplayResult()
+        {
+            _operationStage = OperationStage.DisplayResult;
+
+            double resultValue = 0;
+
+
+            if (_operationMode == OperationMode.Add)
+            {
+                resultValue = _calculator.Add();
+            }
+
+            if (_operationMode == OperationMode.Subtract)
+            {
+                resultValue = _calculator.Subtract();
+            }
+
+            if (_operationMode == OperationMode.Multiply)
+            {
+                resultValue = _calculator.Multiply();
+            }
+
+            if (_operationMode == OperationMode.Divide)
+            {
+                resultValue = _calculator.Divide();
+            }
+
+            _resultString = resultValue.ToString();
+            _firstOperandString = _resultString;
+            displayText.Text = _resultString;
+
+        }
+
+
     }
+
+
 }

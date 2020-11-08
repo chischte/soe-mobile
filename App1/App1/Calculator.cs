@@ -6,37 +6,30 @@ namespace App1
 {
     public class Calculator : ICalculator
     {
-        public double FirstOperand { get; set; }
-        public double SecondOperand { get; set; }
+        public double FirstOperand { get; set; } = 0;
+        public double SecondOperand { get; set; } = 0;
+        public double Result { get; set; } = 0;
         
-        public double Add(double firstOperand, double secondOperand)
+        public double Add()
         {
-            double result = FirstOperand + SecondOperand;
-            return result;
+            Result = FirstOperand + SecondOperand;
+            return Result;
         }
-        
-        
-        //public double Add(double firstOperand, double secondOperand)
-        //{
-        //    double result = firstOperand + secondOperand;
-        //    return result;
-        //}
-
-
-        public double Subtract(double firstOperand, double secondOperand)
+       
+        public double Subtract()
         {
-            double result = firstOperand - secondOperand;
-            return result;
+            Result = FirstOperand - SecondOperand;
+            return Result;
         }
-        public double Multiply(double firstOperand, double secondOperand)
+        public double Multiply()
         {
-            double result = firstOperand * secondOperand;
-            return result;
+            Result = FirstOperand * SecondOperand;
+            return Result;
         }
-        public double Divide(double firstOperand, double secondOperand)
+        public double Divide()
         {
-            double result = firstOperand / secondOperand;
-            return result;
+            Result = FirstOperand / SecondOperand;
+            return Result;
         }
 
     }
