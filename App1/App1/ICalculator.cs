@@ -8,8 +8,7 @@ namespace App1
     {
         Operand FirstOperand { get; set; }
         Operand SecondOperand { get; set; }
-        double Result { get; set; }
-        
+        Operand Result { get; set; }
         double Add();
         double Subtract();
         double Multiply();

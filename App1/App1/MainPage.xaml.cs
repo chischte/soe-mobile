@@ -42,7 +42,6 @@ namespace App1
             Divide = 3
         }
 
-
         // CONVERT, GET AND SET CURRENT OPERAND ---------------------------------------------------
         private void SetCurrentOperandValue(String currentString)
         {
@@ -59,7 +58,7 @@ namespace App1
             }
             if (_operationStage == OperationStage.DisplayResult)
             {
-                _calculator.Result = currentOperandDouble;
+                _calculator.Result.Value = currentOperandDouble;
             }
 
         }
@@ -77,7 +76,7 @@ namespace App1
             }
             else if (_operationStage == OperationStage.DisplayResult)
             {
-                currentOperand = _calculator.Result;
+                currentOperand = _calculator.Result.Value;
             }
 
             string currentOperandString = currentOperand.ToString();
@@ -91,29 +90,7 @@ namespace App1
 
         private bool GetCurrentOperandHasAPoint()
         {
-            bool currentOperandHasAPoint = false;
-
-            if (_operationStage == OperationStage.EnterFirstOperand)
-            {
-                currentOperandHasAPoint = _calculator.FirstOperand.HasAPoint;
-            }
-            else if (_operationStage == OperationStage.EnterSecondOperand)
-            {
-                currentOperandHasAPoint = _calculator.SecondOperand.HasAPoint;
-            }
-
-            return currentOperandHasAPoint;
-        }
-
-        private void MoveResultToFirstOperandIfStageResultDisplay()
-        {
-            if (_operationStage == OperationStage.DisplayResult)
-            {
-                _calculator.FirstOperand.Value = _calculator.Result;
-                _calculator.FirstOperand.HasAPoint = false;
-                _calculator.SecondOperand.Reset();
-                _operationStage = OperationStage.EnterFirstOperand;
-            }
+            return GetCurrentOperandObject().HasAPoint;
         }
 
         private Operand GetCurrentOperandObject()
@@ -127,6 +104,10 @@ namespace App1
             else if (_operationStage == OperationStage.EnterSecondOperand)
             {
                 currentOperandObject = _calculator.SecondOperand;
+            }
+            else if (_operationStage == OperationStage.DisplayResult)
+            {
+                currentOperandObject = _calculator.Result;
             }
             return currentOperandObject;
         }
@@ -146,7 +127,6 @@ namespace App1
             {
                 currentOperand = "";
             }
-
             currentOperand += operand;
             SetCurrentOperandValue(currentOperand);
             displayText.Text = GetCurrentOperandString();
@@ -162,11 +142,11 @@ namespace App1
 
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            displayText.Text = "0";
             _calculator.FirstOperand.Reset();
             _calculator.SecondOperand.Reset();
-            _calculator.Result = 0;
+            _calculator.Result.Reset();
             _operationStage = OperationStage.EnterFirstOperand;
+            displayText.Text = GetCurrentOperandObject().Value.ToString();
         }
 
         private void OnPlusMinusClicked(object sender, EventArgs e)
@@ -183,7 +163,7 @@ namespace App1
             // Continue with a Result:
             if (_operationStage == OperationStage.DisplayResult)
             {
-                _calculator.FirstOperand.Value = _calculator.Result;
+                _calculator.FirstOperand.Value = _calculator.Result.Value;
             }
 
             // Continue a chained Calculation:
@@ -255,15 +235,23 @@ namespace App1
                 _calculator.Divide();
             }
 
-            displayText.Text = _calculator.Result.ToString();
+            displayText.Text = _calculator.Result.Value.ToString();
             // Allow multiple clicks on equal sign:
-            _calculator.FirstOperand.Value = _calculator.Result;
+            _calculator.FirstOperand.Value = _calculator.Result.Value;
 
         }
 
-        //private bool ConvertStringsToDoubleWorks()
-        //{
-        //    bool convertionIsSuccess = true;
+        private void MoveResultToFirstOperandIfStageResultDisplay()
+        {
+            if (_operationStage == OperationStage.DisplayResult)
+            {
+                _calculator.FirstOperand.Value = _calculator.Result.Value;
+                _calculator.FirstOperand.HasAPoint = false;
+                _calculator.SecondOperand.Reset();
+                _operationStage = OperationStage.EnterFirstOperand;
+            }
+        }
+
         //    try
         //    {
         //        _firstOperandDouble = Convert.ToDouble(_firstOperandString);
@@ -276,7 +264,5 @@ namespace App1
         //        convertionIsSuccess = false;
         //    }
 
-        //    return convertionIsSuccess;
-        //}
     }
 }

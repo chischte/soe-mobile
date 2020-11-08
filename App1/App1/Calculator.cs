@@ -35,35 +35,36 @@ namespace App1
         {
             FirstOperand = new Operand();
             SecondOperand = new Operand();
+            Result = new Operand();
         }
         
         
         public Operand FirstOperand { get; set; }
         public Operand SecondOperand { get; set; }
-        public double Result { get; set; } = 0;
+        public Operand Result { get; set; }
 
 
 
        public double Add()
         {
-            Result = FirstOperand.Value + SecondOperand.Value;
-            return Result;
+            Result.Value = FirstOperand.Value + SecondOperand.Value;
+            return Result.Value;
         }
 
         public double Subtract()
         {
-            Result = FirstOperand.Value - SecondOperand.Value;
-            return Result;
+            Result.Value = FirstOperand.Value - SecondOperand.Value;
+            return Result.Value;
         }
         public double Multiply()
         {
-            Result = FirstOperand.Value * SecondOperand.Value;
-            return Result;
+            Result.Value = FirstOperand.Value * SecondOperand.Value;
+            return Result.Value;
         }
         public double Divide()
         {
-            Result = FirstOperand.Value / SecondOperand.Value;
-            return Result;
+            Result.Value = FirstOperand.Value / SecondOperand.Value;
+            return Result.Value;
         }
     }
 }
