@@ -54,9 +54,9 @@
             Grid.Row="1"
             Grid.Column="2"
             BackgroundColor="Gray"
+            Clicked="OnPercentageClicked"
             FontAttributes="Bold"
             FontSize="40"
-            Clicked="OnPercentageClicked"
             Text="%"
             VerticalOptions="Center" />
         <Button
