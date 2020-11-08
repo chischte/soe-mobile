@@ -9,13 +9,13 @@ namespace App1
         public double FirstOperand { get; set; } = 0;
         public double SecondOperand { get; set; } = 0;
         public double Result { get; set; } = 0;
-        
+
         public double Add()
         {
             Result = FirstOperand + SecondOperand;
             return Result;
         }
-       
+
         public double Subtract()
         {
             Result = FirstOperand - SecondOperand;
@@ -31,6 +31,5 @@ namespace App1
             Result = FirstOperand / SecondOperand;
             return Result;
         }
-
     }
 }
