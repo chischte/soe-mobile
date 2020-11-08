@@ -83,16 +83,26 @@ namespace App1
 
         }
 
+
         private void Button_C_Clicked(object sender, EventArgs e)
         {
-            displayText.Text = "0";
-            _firstOperandString = "0";
-            _secondOperandString = "";
-            _firstOperandDouble = 0;
-            _secondOperandDouble = 0;
-            _resultString = "";
-            _operationStage = OperationStage.EnterFirstOperand;
+
+            _calculator.FirstOperand = 4.444;
+            _calculator.SecondOperand = 3.333;
+            displayText.Text = (_calculator.Add(2.0,1.0)).ToString();
+            
         }
+
+        //private void Button_C_Clicked(object sender, EventArgs e)
+        //{
+        //    displayText.Text = "0";
+        //    _firstOperandString = "0";
+        //    _secondOperandString = "";
+        //    _firstOperandDouble = 0;
+        //    _secondOperandDouble = 0;
+        //    _resultString = "";
+        //    _operationStage = OperationStage.EnterFirstOperand;
+        //}
 
         private void OnPlusMinusClicked(object sender, EventArgs e)
         {
