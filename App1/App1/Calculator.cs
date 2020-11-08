@@ -17,6 +17,11 @@ namespace App1
             Value /= 100;
         }
 
+        public void Invert()
+        {
+            Value *= -1;
+        }
+
         public void Reset()
         {
             Value = 0;
