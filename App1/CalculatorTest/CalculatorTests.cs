@@ -19,41 +19,47 @@ namespace CalculatorTest
         [TestMethod]
         public void GetResults_One_Plus_One_ReturnsCorrectResult()
         {
+            // Arange
+            testee.FirstOperand.Value = 1;
+            testee.SecondOperand.Value = 1;
+            
             // Act
-            var result = this.testee.Add(3, 5);
-
-            // Assert
-            Assert.AreEqual(8, result);
-        }
-        [TestMethod]
-        public void GetResults_Five_Minus_Three_returnsCorrectResult()
-        {
-            // Act
-            var result = this.testee.Subtract(5, 3);
+            testee.Add();
+            
+            var result = this.testee.Result.Value;
 
             // Assert
             Assert.AreEqual(2, result);
         }
+        //[TestMethod]
+        //public void GetResults_Five_Minus_Three_returnsCorrectResult()
+        //{
+        //    // Act
+        //    var result = this.testee.Subtract(5, 3);
 
-        [TestMethod]
-        public void GetResults_Five_Times_Six_returnsCorrectResult()
-        {
-            // Act
-            var result = this.testee.Multiply(5, 6);
+        //    // Assert
+        //    Assert.AreEqual(2, result);
+        //}
 
-            // Assert
-            Assert.AreEqual(30, result);
-        }
+        //[TestMethod]
+        //public void GetResults_Five_Times_Six_returnsCorrectResult()
+        //{
+        //    // Act
+        //    var result = this.testee.Multiply(5, 6);
 
-        [TestMethod]
-        public void GetResults_30_diveded_by_6_returnsCorrectResult()
-        {
-            // Act
-            var result = this.testee.Divide(30, 6);
+        //    // Assert
+        //    Assert.AreEqual(30, result);
+        //}
 
-            // Assert
-            Assert.AreEqual(5, result);
-        }
+        //[TestMethod]
+        //public void GetResults_30_diveded_by_6_returnsCorrectResult()
+        //{
+        //    // Act
+        //    var result = this.testee.Divide(30, 6);
+
+        //    // Assert
+        //    Assert.AreEqual(5, result);
+        //}
 
 
     }
