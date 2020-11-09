@@ -6,13 +6,12 @@ using System.Text;
 
 namespace App1
 {
-
     public class Operand
     {
         public double Value { get; set; } = 0;
         public bool HasAPoint { get; set; } = false;
 
-        public void divideBy100()
+        public void DivideBy100()
         {
             Value /= 100;
         }

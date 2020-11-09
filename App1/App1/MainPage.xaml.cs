@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+// Todo: Add "try/catch" to conversions
+
 namespace App1
 {
     public partial class MainPage : ContentPage
@@ -20,13 +22,11 @@ namespace App1
             displayText.Text = "0";
         }
         // FIELDS ---------------------------------------------------------------------------------
-
         private OperationStage _operationStage = OperationStage.EnterFirstOperand;
         private OperationMode _operationMode = OperationMode.Add;
 
 
         // OPERATION MANAGER ----------------------------------------------------------------------
-
         enum OperationStage
         {
             EnterFirstOperand = 0, // Stay in this state until an operator is pressed
@@ -199,7 +199,7 @@ namespace App1
 
         private void OnPercentageClicked(object sender, EventArgs e)
         {
-            GetCurrentOperandObject().divideBy100();
+            GetCurrentOperandObject().DivideBy100();
             displayText.Text = GetCurrentOperandString();
         }
 
