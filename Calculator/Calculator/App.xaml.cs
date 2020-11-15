@@ -6,11 +6,11 @@ namespace Calculator
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainPage = new MainPage(new Calculator());
         }
 
         protected override void OnStart()

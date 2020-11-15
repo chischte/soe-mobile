@@ -1,24 +1,209 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calculator.MainPage">
+<ContentPage
+    x:Class="Calculator.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <Grid BackgroundColor="DarkBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            x:Name="displayText"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            BackgroundColor="LightGray"
+            FontAttributes="Bold"
+            FontSize="50"
+            HorizontalTextAlignment="End"
+            TextColor="Black"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            BackgroundColor="Gray"
+            Clicked="Button_C_Clicked"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="C"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            BackgroundColor="Gray"
+            Clicked="OnPlusMinusClicked"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="+/-"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            BackgroundColor="Gray"
+            Clicked="OnPercentageClicked"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="%"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="3"
+            BackgroundColor="Orange"
+            Clicked="OnSelectOperation"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="÷"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="7"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="8"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="9"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="3"
+            BackgroundColor="Orange"
+            Clicked="OnSelectOperation"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="×"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="4"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="5"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="2"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="6"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="3"
+            BackgroundColor="Orange"
+            Clicked="OnSelectOperation"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="-"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="1"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="2"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="2"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="3"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="3"
+            BackgroundColor="Orange"
+            Clicked="OnSelectOperation"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="+"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BackgroundColor="LightGray"
+            Clicked="OnEnterNumber"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="0"
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="2"
+            BackgroundColor="LightGray"
+            Clicked="OnDotClicked"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="."
+            VerticalOptions="Center" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            BackgroundColor="Orange"
+            Clicked="Button_Result_Clicked"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="="
+            VerticalOptions="Center" />
+    </Grid>
 
 </ContentPage>

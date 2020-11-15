@@ -1,0 +1,1 @@
+C:\git\soe-mobile\Calculator\Calculator.UWP\Calculator.UWP.csproj;x86

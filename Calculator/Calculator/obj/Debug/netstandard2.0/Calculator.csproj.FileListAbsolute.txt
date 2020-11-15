@@ -1,0 +1,14 @@
+C:\git\soe-mobile\Calculator\Calculator\bin\Debug\netstandard2.0\Calculator.deps.json
+C:\git\soe-mobile\Calculator\Calculator\bin\Debug\netstandard2.0\Calculator.dll
+C:\git\soe-mobile\Calculator\Calculator\bin\Debug\netstandard2.0\ref\Calculator.dll
+C:\git\soe-mobile\Calculator\Calculator\bin\Debug\netstandard2.0\Calculator.pdb
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.csprojAssemblyReference.cache
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.AssemblyInfoInputs.cache
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.AssemblyInfo.cs
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.csproj.CoreCompileInputs.cache
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\XamlC.stamp
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.dll
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\ref\Calculator.dll
+C:\git\soe-mobile\Calculator\Calculator\obj\Debug\netstandard2.0\Calculator.pdb
