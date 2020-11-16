@@ -16,7 +16,9 @@ namespace Calculator
             this._calculator = calculator;
         }
 
+
      
+       // ADD NUMBER COMMAND -----------------------------------------------------------------------
         private ICommand _addNumberCommand;
         public ICommand AddNumberCommand
         {
@@ -26,7 +28,8 @@ namespace Calculator
                 return _addNumberCommand;
             }
         }
-
+        
+       // SET OPERATION COMMAND --------------------------------------------------------------------
         private ICommand _setOperationCommand;
         public ICommand SetOperationCommand
         {
@@ -37,7 +40,8 @@ namespace Calculator
             }
         }
 
-        private string _result = string.Empty;
+       // INOTIFY RESULT ---------------------------------------------------------------------------
+       private string _result = string.Empty;
 
         public string Result
         {
@@ -54,13 +58,13 @@ namespace Calculator
                 }
             }
         }
-
-
+        // -----------------------------------------------------------------------------------------
 
 
         private void CalculatorAddNumberCommand(string commandString)
         {
-            Result = "666";
+            _calculator.GetCurrentOperandObject().AddText(commandString);
+            Result = _calculator.GetCurrentOperandObject().Text;
         }
 
         

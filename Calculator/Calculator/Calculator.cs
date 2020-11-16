@@ -4,27 +4,7 @@ using System.Text;
 
 namespace Calculator
 {
-    public class Operand
-    {
-        public double Value { get; set; } = 0;
-        public bool HasAPoint { get; set; } = false;
 
-        public void DivideBy100()
-        {
-            Value /= 100;
-        }
-
-        public void Invert()
-        {
-            Value *= -1;
-        }
-
-        public void Reset()
-        {
-            Value = 0;
-            HasAPoint = false;
-        }
-    }
 
     public class Calculator : ICalculator
     {
@@ -35,13 +15,16 @@ namespace Calculator
             Result = new Operand();
         }
 
-
         public Operand FirstOperand { get; set; }
         public Operand SecondOperand { get; set; }
         public Operand Result { get; set; }
 
 
-
+        public Operand GetCurrentOperandObject()
+        {
+            return FirstOperand;
+        }
+        
         public double Add()
         {
             Result.Value = FirstOperand.Value + SecondOperand.Value;
