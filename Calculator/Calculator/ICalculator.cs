@@ -9,9 +9,11 @@ namespace Calculator
         Operand FirstOperand { get; set; }
         Operand SecondOperand { get; set; }
         Operand Result { get; set; }
-
         Operand GetCurrentOperandObject();
 
+        void SetOperationMode(OperationMode operationMode);
+        void CalculateResult();
+    
         double Add();
         double Subtract();
         double Multiply();

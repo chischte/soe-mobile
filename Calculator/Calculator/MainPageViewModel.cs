@@ -16,9 +16,7 @@ namespace Calculator
             this._calculator = calculator;
         }
 
-
-
-        // ADD NUMBER COMMAND -----------------------------------------------------------------------
+        // ADD NUMBER COMMAND "0-9"-----------------------------------------------------------------
         private ICommand _addNumberCommand;
         public ICommand AddNumberCommand
         {
@@ -29,7 +27,7 @@ namespace Calculator
             }
         }
 
-        // SET OPERATION COMMAND --------------------------------------------------------------------
+        // SET OPERATION COMMAND "+" "-" "×" "÷" "=" -----------------------------------------------
         private ICommand _setOperationCommand;
         public ICommand SetOperationCommand
         {
@@ -39,7 +37,7 @@ namespace Calculator
                 return _setOperationCommand;
             }
         }
-        // MODIFY OPERAND COMMAND --------------------------------------------------------------------
+        // MODIFY OPERAND COMMAND "%" "+/-" "." "C" ------------------------------------------------
         private ICommand _modifyOperandCommand;
         public ICommand ModifyOperandCommand
         {
@@ -73,62 +71,73 @@ namespace Calculator
 
         private void CalculatorAddNumberCommand(string commandString)
         {
-            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
+            Operand currentOperandObject = _calculator.GetCurrentOperandObject();
 
-            _currentOperandObject.AddText(commandString);
+            currentOperandObject.AddText(commandString);
 
-            Result = _currentOperandObject.Text;
+            Result = currentOperandObject.Text;
         }
 
         private void CalculatorModifyOperandCommand(string commandString)
         {
-            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
+            Operand currentOperandObject = _calculator.GetCurrentOperandObject();
 
             switch (commandString)
             {
                 case ".":
                     {
-                        _currentOperandObject.HasAPoint = true;
+                        currentOperandObject.HasAPoint = true;
                         break;
                     }
                 case "%":
                     {
-                        _currentOperandObject.DivideBy100();
+                        currentOperandObject.DivideBy100();
                         break;
                     }
                 case "+/-":
                     {
-                        _currentOperandObject.Invert();
+                        currentOperandObject.Invert();
+                        break;
+                    }
+                case "C":
+                    {
+                        _calculator.FirstOperand.Reset();
+                        _calculator.SecondOperand.Reset();
+                        _calculator.Result.Reset();
                         break;
                     }
             }
-            Result = _currentOperandObject.Text;
+            Result = currentOperandObject.Text;
         }
 
 
         private void CalculatorSetOperationCommand(string commandString)
         {
-            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
             switch (commandString)
             {
                 case "+":
                     {
-                        _calculator.Add();
+                        _calculator.SetOperationMode(OperationMode.Add);
                         break;
                     }
                 case "-":
                     {
-                        _calculator.Subtract();
+                        _calculator.SetOperationMode(OperationMode.Subtract);
                         break;
                     }
                 case "×":
                     {
-                        _calculator.Multiply();
+                        _calculator.SetOperationMode(OperationMode.Multiply);
                         break;
                     }
                 case "÷":
                     {
-                        _calculator.Divide();
+                        _calculator.SetOperationMode(OperationMode.Divide);
+                        break;
+                    }
+                case "=":
+                    {
+                        _calculator.CalculateResult();
                         break;
                     }
             }

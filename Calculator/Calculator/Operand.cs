@@ -39,7 +39,6 @@ namespace Calculator
             Value = Convert.ToDouble(Text);
         }
         
-        
         public void Reset()
         {
             Value = 0;

@@ -19,12 +19,48 @@ namespace Calculator
         public Operand SecondOperand { get; set; }
         public Operand Result { get; set; }
 
-
         public Operand GetCurrentOperandObject()
         {
             return FirstOperand;
         }
-        
+
+        private OperationMode operationMode = OperationMode.Add;
+
+        public void SetOperationMode(OperationMode operationMode)
+        {
+            this.operationMode = operationMode;
+        }
+
+        public void CalculateResult()
+        {
+            switch (operationMode)
+            {
+                case OperationMode.Add:
+                    {
+                        Add();
+                        break;
+                    }
+                case OperationMode.Subtract:
+                    {
+                        Subtract();
+                        break;
+                    }
+
+                case OperationMode.Multiply:
+                    {
+                        Multiply();
+                        break;
+                    }
+
+                case OperationMode.Divide:
+                    {
+                        Divide();
+                        break;
+                    }
+            }
+        }
+
+
         public double Add()
         {
             Result.Value = FirstOperand.Value + SecondOperand.Value;
