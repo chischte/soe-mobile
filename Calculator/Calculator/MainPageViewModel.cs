@@ -7,18 +7,18 @@ using Xamarin.Forms;
 
 namespace Calculator
 {
-    public class MainPageViewModel :ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
         private ICalculator _calculator;
 
-       public MainPageViewModel(ICalculator calculator)
+        public MainPageViewModel(ICalculator calculator)
         {
             this._calculator = calculator;
         }
 
 
-     
-       // ADD NUMBER COMMAND -----------------------------------------------------------------------
+
+        // ADD NUMBER COMMAND -----------------------------------------------------------------------
         private ICommand _addNumberCommand;
         public ICommand AddNumberCommand
         {
@@ -28,8 +28,8 @@ namespace Calculator
                 return _addNumberCommand;
             }
         }
-        
-       // SET OPERATION COMMAND --------------------------------------------------------------------
+
+        // SET OPERATION COMMAND --------------------------------------------------------------------
         private ICommand _setOperationCommand;
         public ICommand SetOperationCommand
         {
@@ -39,9 +39,19 @@ namespace Calculator
                 return _setOperationCommand;
             }
         }
+        // MODIFY OPERAND COMMAND --------------------------------------------------------------------
+        private ICommand _modifyOperandCommand;
+        public ICommand ModifyOperandCommand
+        {
+            get
+            {
+                _modifyOperandCommand = new Command<string>(CalculatorModifyOperandCommand);
+                return _modifyOperandCommand;
+            }
+        }
 
-       // INOTIFY RESULT ---------------------------------------------------------------------------
-       private string _result = string.Empty;
+        // INOTIFY RESULT ---------------------------------------------------------------------------
+        private string _result = string.Empty;
 
         public string Result
         {
@@ -63,17 +73,65 @@ namespace Calculator
 
         private void CalculatorAddNumberCommand(string commandString)
         {
-            _calculator.GetCurrentOperandObject().AddText(commandString);
-            Result = _calculator.GetCurrentOperandObject().Text;
+            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
+
+            _currentOperandObject.AddText(commandString);
+
+            Result = _currentOperandObject.Text;
         }
 
-        
+        private void CalculatorModifyOperandCommand(string commandString)
+        {
+            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
+
+            switch (commandString)
+            {
+                case ".":
+                    {
+                        _currentOperandObject.HasAPoint = true;
+                        break;
+                    }
+                case "%":
+                    {
+                        _currentOperandObject.DivideBy100();
+                        break;
+                    }
+                case "+/-":
+                    {
+                        _currentOperandObject.Invert();
+                        break;
+                    }
+            }
+            Result = _currentOperandObject.Text;
+        }
+
+
         private void CalculatorSetOperationCommand(string commandString)
         {
-            _calculator.FirstOperand.Value = 99999;
-            _calculator.SecondOperand.Value = 999999;
-            _calculator.Result.Value = 9999999;
-            _calculator.Multiply();
+            Operand _currentOperandObject = _calculator.GetCurrentOperandObject();
+            switch (commandString)
+            {
+                case "+":
+                    {
+                        _calculator.Add();
+                        break;
+                    }
+                case "-":
+                    {
+                        _calculator.Subtract();
+                        break;
+                    }
+                case "×":
+                    {
+                        _calculator.Multiply();
+                        break;
+                    }
+                case "÷":
+                    {
+                        _calculator.Divide();
+                        break;
+                    }
+            }
         }
 
         // ******************************************************************************************
