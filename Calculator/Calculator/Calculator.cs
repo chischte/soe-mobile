@@ -21,15 +21,38 @@ namespace Calculator
 
         public Operand GetCurrentOperandObject()
         {
-            return FirstOperand;
+            switch (operationStage)
+            {
+                case OperationStage.EnterFirstOperand:
+                    {
+                        return FirstOperand;
+                    }
+                case OperationStage.EnterSecondOperand:
+                    {
+                        return SecondOperand;
+                    }
+                case OperationStage.DisplayResult:
+                    {
+                        return Result;
+                    }
+                default:
+                    {
+                        return FirstOperand;
+                    }
+            }
         }
 
         private OperationMode operationMode = OperationMode.Add;
+        private OperationStage operationStage = OperationStage.EnterFirstOperand;
 
         public void SetOperationMode(OperationMode operationMode)
         {
             this.operationMode = operationMode;
+            MoveResultToFirstOperandIfStageResultDisplay();
+            operationStage = OperationStage.EnterSecondOperand;
         }
+
+
 
         public void CalculateResult()
         {
@@ -60,6 +83,38 @@ namespace Calculator
             }
         }
 
+        public void ModifyOperand(string commandString)
+        {
+            MoveResultToFirstOperandIfStageResultDisplay();
+            switch (commandString)
+            {
+                //    MoveResultToFirstOperandIfStageResultDisplay();
+                case ".":
+                    {
+                        GetCurrentOperandObject().HasAPoint = true;
+                        break;
+                    }
+                case "%":
+                    {
+                        GetCurrentOperandObject().DivideBy100();
+                        break;
+                    }
+                case "+/-":
+                    {
+                        GetCurrentOperandObject().Invert();
+                        break;
+                    }
+                case "C":
+                    {
+                        FirstOperand.Reset();
+                        SecondOperand.Reset();
+                        Result.Reset();
+                        break;
+                    }
+            }
+           // DisplayText = GetCurrentOperandObject().Text;
+        }
+
 
         public double Add()
         {
@@ -82,5 +137,17 @@ namespace Calculator
             Result.Value = FirstOperand.Value / SecondOperand.Value;
             return Result.Value;
         }
+
+        public void MoveResultToFirstOperandIfStageResultDisplay()
+        {
+            if (operationStage == OperationStage.DisplayResult)
+            {
+                FirstOperand.Value = Result.Value;
+                FirstOperand.HasAPoint = false;
+                SecondOperand.Reset();
+                operationStage = OperationStage.EnterFirstOperand;
+            }
+        }
+
     }
 }

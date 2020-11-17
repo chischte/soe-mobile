@@ -13,6 +13,8 @@ namespace Calculator
 
         void SetOperationMode(OperationMode operationMode);
         void CalculateResult();
+
+        void ModifyOperand(string operandString);
     
         double Add();
         double Subtract();

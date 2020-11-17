@@ -25,6 +25,7 @@ namespace Calculator
                 _addNumberCommand = new Command<string>(CalculatorAddNumberCommand);
                 return _addNumberCommand;
             }
+
         }
 
         // SET OPERATION COMMAND "+" "-" "×" "÷" "=" -----------------------------------------------
@@ -49,20 +50,20 @@ namespace Calculator
         }
 
         // INOTIFY RESULT ---------------------------------------------------------------------------
-        private string _result = string.Empty;
+        private string _displayText = string.Empty;
 
-        public string Result
+        public string DisplayText
         {
             get
             {
-                return _result;
+                return _displayText;
             }
             private set
             {
-                if (_result != value)
+                if (_displayText != value)
                 {
-                    _result = value;
-                    OnPropertyChanged(nameof(Result));
+                    _displayText = value;
+                    OnPropertyChanged(nameof(DisplayText));
                 }
             }
         }
@@ -71,43 +72,18 @@ namespace Calculator
 
         private void CalculatorAddNumberCommand(string commandString)
         {
+            //    MoveResultToFirstOperandIfStageResultDisplay();
             Operand currentOperandObject = _calculator.GetCurrentOperandObject();
 
             currentOperandObject.AddText(commandString);
 
-            Result = currentOperandObject.Text;
+            DisplayText = _calculator.GetCurrentOperandObject().Text;
         }
 
         private void CalculatorModifyOperandCommand(string commandString)
         {
-            Operand currentOperandObject = _calculator.GetCurrentOperandObject();
-
-            switch (commandString)
-            {
-                case ".":
-                    {
-                        currentOperandObject.HasAPoint = true;
-                        break;
-                    }
-                case "%":
-                    {
-                        currentOperandObject.DivideBy100();
-                        break;
-                    }
-                case "+/-":
-                    {
-                        currentOperandObject.Invert();
-                        break;
-                    }
-                case "C":
-                    {
-                        _calculator.FirstOperand.Reset();
-                        _calculator.SecondOperand.Reset();
-                        _calculator.Result.Reset();
-                        break;
-                    }
-            }
-            Result = currentOperandObject.Text;
+            _calculator.ModifyOperand(commandString);
+            DisplayText = _calculator.GetCurrentOperandObject().Text;
         }
 
 
@@ -140,6 +116,15 @@ namespace Calculator
                         _calculator.CalculateResult();
                         break;
                     }
+            }
+
+            if (commandString == "=")
+            {
+                DisplayText = _calculator.Result.Text;
+            }
+            else
+            {
+                DisplayText = commandString;
             }
         }
 
@@ -185,7 +170,7 @@ namespace Calculator
         //    }
         //    if (_operationStage == OperationStage.DisplayResult)
         //    {
-        //        _calculator.Result.Value = currentOperandDouble;
+        //        _calculator.DisplayText.Value = currentOperandDouble;
         //    }
 
         //}
@@ -203,7 +188,7 @@ namespace Calculator
         //    }
         //    else if (_operationStage == OperationStage.DisplayResult)
         //    {
-        //        currentOperand = _calculator.Result.Value;
+        //        currentOperand = _calculator.DisplayText.Value;
         //    }
 
         //    string currentOperandString = currentOperand.ToString();
@@ -234,7 +219,7 @@ namespace Calculator
         //    }
         //    else if (_operationStage == OperationStage.DisplayResult)
         //    {
-        //        currentOperandObject = _calculator.Result;
+        //        currentOperandObject = _calculator.DisplayText;
         //    }
         //    return currentOperandObject;
         //}
@@ -271,7 +256,7 @@ namespace Calculator
         //{
         //    _calculator.FirstOperand.Reset();
         //    _calculator.SecondOperand.Reset();
-        //    _calculator.Result.Reset();
+        //    _calculator.DisplayText.Reset();
         //    _operationStage = OperationStage.EnterFirstOperand;
         //    displayText.Text = GetCurrentOperandObject().Value.ToString();
         //}
@@ -287,10 +272,10 @@ namespace Calculator
         //    Button button = (Button)sender;
         //    string pressed = button.Text;
 
-        //    // Continue with a Result:
+        //    // Continue with a DisplayText:
         //    if (_operationStage == OperationStage.DisplayResult)
         //    {
-        //        _calculator.FirstOperand.Value = _calculator.Result.Value;
+        //        _calculator.FirstOperand.Value = _calculator.DisplayText.Value;
         //    }
 
         //    // Continue a chained Calculation:
@@ -362,9 +347,9 @@ namespace Calculator
         //        _calculator.Divide();
         //    }
 
-        //    displayText.Text = _calculator.Result.Value.ToString();
+        //    displayText.Text = _calculator.DisplayText.Value.ToString();
         //    // Allow multiple clicks on equal sign:
-        //    _calculator.FirstOperand.Value = _calculator.Result.Value;
+        //    _calculator.FirstOperand.Value = _calculator.DisplayText.Value;
 
         //}
 
@@ -372,7 +357,7 @@ namespace Calculator
         //{
         //    if (_operationStage == OperationStage.DisplayResult)
         //    {
-        //        _calculator.FirstOperand.Value = _calculator.Result.Value;
+        //        _calculator.FirstOperand.Value = _calculator.DisplayText.Value;
         //        _calculator.FirstOperand.HasAPoint = false;
         //        _calculator.SecondOperand.Reset();
         //        _operationStage = OperationStage.EnterFirstOperand;
