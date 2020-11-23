@@ -7,3 +7,5 @@ App1/App1/bin/Debug/
 .suo
 
 App1/.vs/App1/DesignTimeBuild/
+
+*.cache

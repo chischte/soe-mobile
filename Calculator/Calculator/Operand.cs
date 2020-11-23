@@ -24,13 +24,12 @@ namespace Calculator
             UpdateTextFromValue();
         }
 
-        
-		public void UpdateTextFromValue()
-		{
-			Text = Value.ToString();			
-		}
-		
-		public void AddText(String text)
+        public void UpdateTextFromValue()
+        {
+            Text = Value.ToString();
+        }
+
+        public void AddText(String text)
         {
             if (HasAPoint && !Text.Contains("."))
             {
@@ -44,7 +43,7 @@ namespace Calculator
             Text += text;
             Value = Convert.ToDouble(Text);
         }
-        
+
         public void Reset()
         {
             Value = 0;
