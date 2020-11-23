@@ -25,7 +25,7 @@ namespace Calculator
         }
 
         
-		public void UpdateTextFromValue();
+		public void UpdateTextFromValue()
 		{
 			Text = Value.ToString();			
 		}

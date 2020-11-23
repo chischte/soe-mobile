@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms.Internals;
 
 namespace Calculator
 {
@@ -48,14 +49,30 @@ namespace Calculator
         public void SetOperationMode(OperationMode operationMode)
         {
             this.operationMode = operationMode;
-            MoveResultToFirstOperandIfStageResultDisplay();
-            operationStage = OperationStage.EnterSecondOperand;
+
+            if (operationStage == OperationStage.EnterFirstOperand)
+            {
+                SecondOperand.Reset();
+                operationStage = OperationStage.EnterSecondOperand;
+            }
+            else if (operationStage == OperationStage.EnterSecondOperand)
+            {
+                CalculateResult();
+                MoveResultToFirstOperand();
+                SecondOperand.Reset();
+                operationStage=OperationStage.EnterSecondOperand;
+            }
+            else if (operationStage == OperationStage.DisplayResult)
+            {
+                MoveResultToFirstOperand();
+                SecondOperand.Reset();
+                operationStage = OperationStage.EnterSecondOperand;
+            }
         }
-
-
 
         public void CalculateResult()
         {
+            operationStage = OperationStage.DisplayResult;
             switch (operationMode)
             {
                 case OperationMode.Add:
@@ -81,16 +98,18 @@ namespace Calculator
                         break;
                     }
             }
-			Result.UpdateTextFromValue();
-			
+            Result.UpdateTextFromValue();
         }
 
         public void ModifyOperand(string commandString)
         {
-            MoveResultToFirstOperandIfStageResultDisplay();
+            if (operationStage == OperationStage.DisplayResult)
+            {
+                MoveResultToFirstOperand();
+            }
+
             switch (commandString)
             {
-                //    MoveResultToFirstOperandIfStageResultDisplay();
                 case ".":
                     {
                         GetCurrentOperandObject().HasAPoint = true;
@@ -111,12 +130,11 @@ namespace Calculator
                         FirstOperand.Reset();
                         SecondOperand.Reset();
                         Result.Reset();
+                        operationStage = OperationStage.EnterFirstOperand;
                         break;
                     }
             }
-           // DisplayText = GetCurrentOperandObject().Text;
         }
-
 
         public double Add()
         {
@@ -140,15 +158,11 @@ namespace Calculator
             return Result.Value;
         }
 
-        public void MoveResultToFirstOperandIfStageResultDisplay()
+        public void MoveResultToFirstOperand()
         {
-            if (operationStage == OperationStage.DisplayResult)
-            {
-                FirstOperand.Value = Result.Value;
-                FirstOperand.HasAPoint = false;
-                SecondOperand.Reset();
-                operationStage = OperationStage.EnterFirstOperand;
-            }
+            FirstOperand.Value = Result.Value;
+            FirstOperand.UpdateTextFromValue();
+            FirstOperand.HasAPoint = false;
         }
 
     }
