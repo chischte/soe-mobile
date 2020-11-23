@@ -114,13 +114,14 @@ namespace Calculator
                 case "=":
                     {
                         _calculator.CalculateResult();
-                        break;
+						break;
                     }
             }
 
             if (commandString == "=")
             {
-                DisplayText = _calculator.Result.Text;
+                
+				DisplayText = _calculator.Result.Text;
             }
             else
             {

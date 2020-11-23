@@ -15,16 +15,22 @@ namespace Calculator
         public void DivideBy100()
         {
             Value /= 100;
-            Text = Value.ToString();
+            UpdateTextFromValue();
         }
 
         public void Invert()
         {
             Value *= -1;
-            Text = Value.ToString();
+            UpdateTextFromValue();
         }
 
-        public void AddText(String text)
+        
+		public void UpdateTextFromValue();
+		{
+			Text = Value.ToString();			
+		}
+		
+		public void AddText(String text)
         {
             if (HasAPoint && !Text.Contains("."))
             {

@@ -81,6 +81,8 @@ namespace Calculator
                         break;
                     }
             }
+			Result.UpdateTextFromValue();
+			
         }
 
         public void ModifyOperand(string commandString)
