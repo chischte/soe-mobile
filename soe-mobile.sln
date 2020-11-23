@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.UWP", "Calculato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Android", "Calculator\Calculator.Android\Calculator.Android.csproj", "{A7411ABD-B9B7-437F-B81D-9519ABA6AE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator\Calculator.csproj", "{615CF2C6-474C-4476-AE43-A56E02E4FD9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator\Calculator.csproj", "{615CF2C6-474C-4476-AE43-A56E02E4FD9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Test", "Calculator.Test\Calculator.Test.csproj", "{68E9CC1F-E516-443A-B943-4D83E03A577C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{615CF2C6-474C-4476-AE43-A56E02E4FD9B} = {615CF2C6-474C-4476-AE43-A56E02E4FD9B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +98,22 @@ Global
 		{615CF2C6-474C-4476-AE43-A56E02E4FD9B}.Release|x86.ActiveCfg = Release|Any CPU
 		{615CF2C6-474C-4476-AE43-A56E02E4FD9B}.Release|x86.Build.0 = Release|Any CPU
 		{615CF2C6-474C-4476-AE43-A56E02E4FD9B}.Release|x86.Deploy.0 = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|ARM.Build.0 = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|x64.Build.0 = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Debug|x86.Build.0 = Debug|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|ARM.Build.0 = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|x64.ActiveCfg = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|x64.Build.0 = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|x86.ActiveCfg = Release|Any CPU
+		{68E9CC1F-E516-443A-B943-4D83E03A577C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
