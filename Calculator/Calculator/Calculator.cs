@@ -9,6 +9,10 @@ namespace Calculator
 
     public class Calculator : ICalculator
     {
+        public Operand FirstOperand { get; set; }
+        public Operand SecondOperand { get; set; }
+        public Operand Result { get; set; }
+        
         public Calculator()
         {
             FirstOperand = new Operand();
@@ -16,9 +20,8 @@ namespace Calculator
             Result = new Operand();
         }
 
-        public Operand FirstOperand { get; set; }
-        public Operand SecondOperand { get; set; }
-        public Operand Result { get; set; }
+        private OperationMode operationMode = OperationMode.Add;
+        private OperationStage operationStage = OperationStage.EnterFirstOperand;
 
         public Operand GetCurrentOperandObject()
         {
@@ -43,31 +46,45 @@ namespace Calculator
             }
         }
 
-        private OperationMode operationMode = OperationMode.Add;
-        private OperationStage operationStage = OperationStage.EnterFirstOperand;
-
         public void SetOperationMode(OperationMode operationMode)
         {
             this.operationMode = operationMode;
+            SwitchValues();
+        }
 
-            if (operationStage == OperationStage.EnterFirstOperand)
+        private void SwitchValues()
+        {
+            switch (operationStage)
             {
-                SecondOperand.Reset();
-                operationStage = OperationStage.EnterSecondOperand;
+                case OperationStage.EnterFirstOperand:
+                    {
+                        SecondOperand.Reset();
+                        operationStage = OperationStage.EnterSecondOperand;
+                        break;
+                    }
+                case OperationStage.EnterSecondOperand:
+                    {
+                        CalculateResult();
+                        MoveResultToFirstOperand();
+                        SecondOperand.Reset();
+                        operationStage = OperationStage.EnterSecondOperand;
+                        break;
+                    }
+                case OperationStage.DisplayResult:
+                    {
+                        MoveResultToFirstOperand();
+                        SecondOperand.Reset();
+                        operationStage = OperationStage.EnterSecondOperand;
+                        break;
+                    }
             }
-            else if (operationStage == OperationStage.EnterSecondOperand)
-            {
-                CalculateResult();
-                MoveResultToFirstOperand();
-                SecondOperand.Reset();
-                operationStage=OperationStage.EnterSecondOperand;
-            }
-            else if (operationStage == OperationStage.DisplayResult)
-            {
-                MoveResultToFirstOperand();
-                SecondOperand.Reset();
-                operationStage = OperationStage.EnterSecondOperand;
-            }
+        }
+
+        private void MoveResultToFirstOperand()
+        {
+            FirstOperand.Value = Result.Value;
+            FirstOperand.UpdateTextFromValue();
+            FirstOperand.HasAPoint = false;
         }
 
         public void CalculateResult()
@@ -157,13 +174,5 @@ namespace Calculator
             Result.Value = FirstOperand.Value / SecondOperand.Value;
             return Result.Value;
         }
-
-        public void MoveResultToFirstOperand()
-        {
-            FirstOperand.Value = Result.Value;
-            FirstOperand.UpdateTextFromValue();
-            FirstOperand.HasAPoint = false;
-        }
-
     }
 }
