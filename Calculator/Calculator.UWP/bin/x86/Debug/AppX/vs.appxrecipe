@@ -720,7 +720,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\git\soe-mobile\Calculator\Calculator\bin\Debug\netstandard2.0\Calculator.dll">
       <PackagePath>Calculator.dll</PackagePath>
-      <Modified>2020-11-24T07:37:30.203</Modified>
+      <Modified>2020-11-24T08:02:01.316</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\michi\.nuget\packages\win2d.uwp\1.20.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
       <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
