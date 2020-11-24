@@ -50,7 +50,7 @@ namespace Calculator
             }
         }
 
-        // INOTIFY RESULT ---------------------------------------------------------------------------
+        // INOTIFY RESULT --------------------------------------------------------------------------
         private string _displayText = string.Empty;
 
         public string DisplayText
@@ -68,6 +68,23 @@ namespace Calculator
                 }
             }
         }
+        // INOTIFY COLOR ---------------------------------------------------------------------------
+        private string color = "black";
+        public string Color
+        {
+            get
+            {
+                return color;
+            }
+            private set
+            {
+                if (color != value)
+                {
+                    color = value;
+                    OnPropertyChanged(nameof(Color));
+                }
+            }
+        }
         // -----------------------------------------------------------------------------------------
 
 
@@ -78,6 +95,30 @@ namespace Calculator
             currentOperandObject.AddText(commandString);
 
             DisplayText = _calculator.GetCurrentOperandObject().Text;
+            UpdateResultColor();
+        }
+
+        private void UpdateResultColor()
+        {
+
+            if (_calculator.Result.Value < 0)
+            {
+                SetResultColor("red");
+            }
+            else if (_calculator.Result.Value > 0)
+            {
+                SetResultColor("green");
+            }
+            else
+            {
+                SetResultColor("black");
+            }
+
+
+        }
+        private void SetResultColor(string newColor)
+        {
+            Color = newColor;
         }
 
         private void CalculatorModifyOperandCommand(string commandString)

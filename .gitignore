@@ -9,3 +9,5 @@ App1/App1/bin/Debug/
 App1/.vs/App1/DesignTimeBuild/
 
 *.cache
+
+*.exe

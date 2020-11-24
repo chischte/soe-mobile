@@ -29,7 +29,7 @@
             FontSize="50"
             HorizontalTextAlignment="End"
             Text="{Binding DisplayText}"
-            TextColor="Black"
+            TextColor="{Binding Color}"
             VerticalOptions="Center"
             VerticalTextAlignment="Center" />
         <Button
