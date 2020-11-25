@@ -91,16 +91,13 @@ namespace Calculator
 
         private void CalculatorAddNumberCommand(string commandString)
         {
-            Operand currentOperandObject = _calculator.GetCurrentOperandObject();
-
-            currentOperandObject.AddText(commandString);
-
-            DisplayText = _calculator.GetCurrentOperandObject().Text;
+            _calculator.AddStringToCurrentOperand(commandString);
+            DisplayText = _calculator.GetCurrentOperandText();
         }
 
         private void UpdateDisplayTextColor()
         {
-            if (_calculator.GetCurrentOperandObject().Value < 0)
+            if (_calculator.GetCurrentOperandValue() < 0)
             {
                 Color = "red";
             }
@@ -113,7 +110,7 @@ namespace Calculator
         private void CalculatorModifyOperandCommand(string commandString)
         {
             _calculator.ModifyOperand(commandString);
-            DisplayText = _calculator.GetCurrentOperandObject().Text;
+            DisplayText = _calculator.GetCurrentOperandText();
         }
 
 
@@ -150,7 +147,7 @@ namespace Calculator
 
             if (commandString == "=")
             {
-                DisplayText = _calculator.Result.Text;
+                DisplayText = _calculator.GetResultText();
             }
             else
             {

@@ -93,9 +93,11 @@ C:\git\soe-mobile\Calculator.Test\bin\Debug\netcoreapp3.1\Calculator.pdb
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.csprojAssemblyReference.cache
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.AssemblyInfoInputs.cache
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.AssemblyInfo.cs
-C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.csproj.CoreCompileInputs.cache
-C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\XamlC.stamp
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.csproj.CopyComplete
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.dll
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.pdb
 C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.genruntimeconfig.cache
+C:\git\soe-mobile\Calculator.Test\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\git\soe-mobile\Calculator.Test\bin\Debug\netcoreapp3.1\Moq.dll
+C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\Calculator.Test.csproj.CoreCompileInputs.cache
+C:\git\soe-mobile\Calculator.Test\obj\Debug\netcoreapp3.1\XamlC.stamp

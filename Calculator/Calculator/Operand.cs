@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Calculator
 {
-    public class Operand
+    public class Operand : IOperand
     {
         public double Value { get; set; } = 0;
 

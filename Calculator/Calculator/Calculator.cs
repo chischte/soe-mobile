@@ -11,17 +11,19 @@ namespace Calculator
     {
         public Operand FirstOperand { get; set; }
         public Operand SecondOperand { get; set; }
-        public Operand Result { get; set; }
-        
+        public Operand ResultOperand { get; set; }
+
         public Calculator()
         {
             FirstOperand = new Operand();
             SecondOperand = new Operand();
-            Result = new Operand();
+            ResultOperand = new Operand();
         }
 
         private OperationMode operationMode = OperationMode.Add;
         private OperationStage operationStage = OperationStage.EnterFirstOperand;
+
+
 
         public Operand GetCurrentOperandObject()
         {
@@ -37,13 +39,36 @@ namespace Calculator
                     }
                 case OperationStage.DisplayResult:
                     {
-                        return Result;
+                        return ResultOperand;
                     }
                 default:
                     {
                         return FirstOperand;
                     }
             }
+        }
+
+        public string GetCurrentOperandText()
+        {
+            return GetCurrentOperandObject().Text;
+
+        }
+
+        public double GetCurrentOperandValue()
+        {
+            return GetCurrentOperandObject().Value;
+
+        }
+
+        public string GetResultText()
+        {
+            return GetCurrentOperandObject().Text;
+
+        }
+
+        public void AddStringToCurrentOperand(string number)
+        {
+            GetCurrentOperandObject().AddText(number);
         }
 
         public void SetOperationMode(OperationMode operationMode)
@@ -82,7 +107,7 @@ namespace Calculator
 
         private void MoveResultToFirstOperand()
         {
-            FirstOperand.Value = Result.Value;
+            FirstOperand.Value = ResultOperand.Value;
             FirstOperand.UpdateTextFromValue();
             FirstOperand.HasAPoint = false;
         }
@@ -115,7 +140,7 @@ namespace Calculator
                         break;
                     }
             }
-            Result.UpdateTextFromValue();
+            ResultOperand.UpdateTextFromValue();
         }
 
         public void ModifyOperand(string commandString)
@@ -146,7 +171,7 @@ namespace Calculator
                     {
                         FirstOperand.Reset();
                         SecondOperand.Reset();
-                        Result.Reset();
+                        ResultOperand.Reset();
                         operationStage = OperationStage.EnterFirstOperand;
                         break;
                     }
@@ -155,24 +180,24 @@ namespace Calculator
 
         public double Add()
         {
-            Result.Value = FirstOperand.Value + SecondOperand.Value;
-            return Result.Value;
+            ResultOperand.Value = FirstOperand.Value + SecondOperand.Value;
+            return ResultOperand.Value;
         }
 
         public double Subtract()
         {
-            Result.Value = FirstOperand.Value - SecondOperand.Value;
-            return Result.Value;
+            ResultOperand.Value = FirstOperand.Value - SecondOperand.Value;
+            return ResultOperand.Value;
         }
         public double Multiply()
         {
-            Result.Value = FirstOperand.Value * SecondOperand.Value;
-            return Result.Value;
+            ResultOperand.Value = FirstOperand.Value * SecondOperand.Value;
+            return ResultOperand.Value;
         }
         public double Divide()
         {
-            Result.Value = FirstOperand.Value / SecondOperand.Value;
-            return Result.Value;
+            ResultOperand.Value = FirstOperand.Value / SecondOperand.Value;
+            return ResultOperand.Value;
         }
     }
 }

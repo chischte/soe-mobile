@@ -10,6 +10,7 @@ namespace Calculator
         public App()
         {
             InitializeComponent();
+
             MainPage = new MainPage(new MainPageViewModel(new Calculator()));
         }
 
