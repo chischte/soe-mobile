@@ -3,3 +3,5 @@
 *.exe
 *.dll
 Calculator/Calculator/bin/
+
+*.testlog
