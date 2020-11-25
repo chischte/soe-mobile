@@ -7,6 +7,7 @@ namespace Calculator
 {
     public interface IOperand
     {
+        // add getter and setter for private fields
         void DivideBy100();
         void Invert();
 

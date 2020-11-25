@@ -6,12 +6,21 @@ namespace Calculator
 {
     public class Operand : IOperand
     {
-        public double Value { get; set; } = 0;
+        public double Value { get; private set; } = 0;
 
-        public string Text { get; set; } = "0";
+        public string Text { get; private set; } = "0";
 
-        public bool HasAPoint { get; set; } = false;
+        private bool HasAPoint { get; set; } = false;
 
+        public void SetHasAPoint(bool hasAPoint)
+        {
+            HasAPoint = hasAPoint;
+        }
+
+        public void SetValue(double value)
+        {
+            Value = value;
+        }
 
 
         public void DivideBy100()

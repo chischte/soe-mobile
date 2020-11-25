@@ -9,9 +9,9 @@ namespace Calculator
 
     public class Calculator : ICalculator
     {
-        public Operand FirstOperand { get; set; }
-        public Operand SecondOperand { get; set; }
-        public Operand ResultOperand { get; set; }
+        private Operand FirstOperand { get; set; }
+        private Operand SecondOperand { get; set; }
+        private Operand ResultOperand { get; set; }
 
         public Calculator()
         {
@@ -107,9 +107,9 @@ namespace Calculator
 
         private void MoveResultToFirstOperand()
         {
-            FirstOperand.Value = ResultOperand.Value;
+            FirstOperand.SetValue(ResultOperand.Value);
             FirstOperand.UpdateTextFromValue();
-            FirstOperand.HasAPoint = false;
+            FirstOperand.SetHasAPoint(false);
         }
 
         public void CalculateResult()
@@ -154,7 +154,7 @@ namespace Calculator
             {
                 case ".":
                     {
-                        GetCurrentOperandObject().HasAPoint = true;
+                        GetCurrentOperandObject().SetHasAPoint(true);
                         break;
                     }
                 case "%":
@@ -180,23 +180,23 @@ namespace Calculator
 
         public double Add()
         {
-            ResultOperand.Value = FirstOperand.Value + SecondOperand.Value;
+            ResultOperand.SetValue(FirstOperand.Value + SecondOperand.Value);
             return ResultOperand.Value;
         }
 
         public double Subtract()
         {
-            ResultOperand.Value = FirstOperand.Value - SecondOperand.Value;
+            ResultOperand.SetValue(FirstOperand.Value - SecondOperand.Value);
             return ResultOperand.Value;
         }
         public double Multiply()
         {
-            ResultOperand.Value = FirstOperand.Value * SecondOperand.Value;
+            ResultOperand.SetValue(FirstOperand.Value * SecondOperand.Value);
             return ResultOperand.Value;
         }
         public double Divide()
         {
-            ResultOperand.Value = FirstOperand.Value / SecondOperand.Value;
+            ResultOperand.SetValue(FirstOperand.Value / SecondOperand.Value);
             return ResultOperand.Value;
         }
     }
