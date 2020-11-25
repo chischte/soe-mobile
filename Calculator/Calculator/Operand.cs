@@ -12,6 +12,8 @@ namespace Calculator
 
         public bool HasAPoint { get; set; } = false;
 
+
+
         public void DivideBy100()
         {
             Value /= 100;
