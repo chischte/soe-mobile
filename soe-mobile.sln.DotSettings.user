@@ -1,2 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ef55d401_002D3763_002D47a2_002D98d8_002Dd818bca78162/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CalculatorTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::68E9CC1F-E516-443A-B943-4D83E03A577C::.NETCoreApp,Version=v3.1::Calculator.Test.CalculatorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=INOTIFY/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

@@ -5,15 +5,13 @@ using Xamarin.Forms.Internals;
 
 namespace Calculator
 {
-
-
     public class Calculator : ICalculator
     {
         private Operand FirstOperand { get; set; }
         private Operand SecondOperand { get; set; }
         private Operand ResultOperand { get; set; }
 
-        public Calculator()
+       public Calculator()
         {
             FirstOperand = new Operand();
             SecondOperand = new Operand();
@@ -22,7 +20,6 @@ namespace Calculator
 
         private OperationMode operationMode = OperationMode.Add;
         private OperationStage operationStage = OperationStage.EnterFirstOperand;
-
 
 
         public Operand GetCurrentOperandObject()
@@ -112,7 +109,7 @@ namespace Calculator
             FirstOperand.SetHasAPoint(false);
         }
 
-        public void CalculateResult()
+        public double CalculateResult()
         {
             operationStage = OperationStage.DisplayResult;
             switch (operationMode)
@@ -141,6 +138,7 @@ namespace Calculator
                     }
             }
             ResultOperand.UpdateTextFromValue();
+            return ResultOperand.Value;
         }
 
         public void ModifyOperand(string commandString)
@@ -198,6 +196,15 @@ namespace Calculator
         {
             ResultOperand.SetValue(FirstOperand.Value / SecondOperand.Value);
             return ResultOperand.Value;
+        }
+
+        public void SetFirstOperandValueForTesting(double value)
+        {
+            FirstOperand.SetValue(value);
+        }
+        public void SetSecondOperandValueForTesting(double value)
+        {
+            SecondOperand.SetValue(value);
         }
     }
 }

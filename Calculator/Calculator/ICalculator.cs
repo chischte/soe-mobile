@@ -7,7 +7,7 @@ namespace Calculator
     public interface ICalculator
     {
         void SetOperationMode(OperationMode operationMode);
-        void CalculateResult();
+        double CalculateResult();
         string GetResultText();
         string GetCurrentOperandText();
         double GetCurrentOperandValue();
